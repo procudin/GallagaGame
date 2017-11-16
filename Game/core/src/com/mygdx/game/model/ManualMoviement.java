@@ -14,20 +14,44 @@ import com.badlogic.gdx.Input.Keys;
  */
 public class ManualMoviement extends Movement{
     
+    public static boolean isOutOfWindow(Transform t){        
+        int height = Gdx.graphics.getHeight();
+        int width = Gdx.graphics.getWidth();
+        
+        return t.X > width || t.X < 0 || t.Y > height || t.Y < 0;
+    }
+    
+    private float tmp;
+    
     @Override
     public void update(float delta){
         Transform t = _object.transform();
         
+        tmp = t.X;      
+        
         if (Gdx.input.isKeyPressed(Keys.LEFT)){
-            t.X -= speed * delta;
+            tmp -= speed * delta;
+            if (!(tmp < 0 || tmp > Gdx.graphics.getWidth()))
+                t.X = tmp;
         } else if (Gdx.input.isKeyPressed(Keys.RIGHT)){
-            t.X += speed * delta;
+            tmp += speed * delta;
+            
+            if (!(tmp < 0 || tmp > Gdx.graphics.getWidth()))
+                t.X = tmp;
         }
         
+        tmp = t.Y;   
+        
         if (Gdx.input.isKeyPressed(Keys.UP)){
-            t.Y += speed * delta;
+            tmp += speed * delta;
+            
+            if (!(tmp < 0 || tmp > Gdx.graphics.getHeight()))
+                t.Y = tmp;            
         } else if (Gdx.input.isKeyPressed(Keys.DOWN)){
-            t.Y -= speed * delta;
+            tmp -= speed * delta;
+            
+            if (!(tmp < 0 || tmp > Gdx.graphics.getHeight()))
+                t.Y = tmp; 
         }
     }
 }
