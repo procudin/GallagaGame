@@ -16,13 +16,11 @@ import com.mygdx.game.model.Transform;
  */
 public class SpriteRenderer extends Renderer{
     
-    public SpriteRenderer(String assetName) {       
+    public SpriteRenderer(String assetName) {               
+        sprite = new Sprite(new Texture(assetName));    
         
-        sprite = new Sprite(new Texture(assetName));        
         width  = sprite.getWidth();
         height = sprite.getHeight();
-        
-        sprite.setScale(0.5f);
     }
     
     public SpriteRenderer(String assetName, int width, int height) {       
@@ -41,9 +39,8 @@ public class SpriteRenderer extends Renderer{
     
     @Override
     public void render(float delta, SpriteBatch batch){
-        Transform t = _object.transform();   
-        ///sprite.rotate(50f/360);
-        batch.draw(sprite, t.X, t.Y, (t.X + width) , (t.Y + height),width,height,1, 1, t.angle, false );
+        Transform t = _object.transform();        
+        batch.draw(sprite, t.X - (width)/2 , t.Y - (height)/2 ,(width)/2,(height)/2,width,height,1, 1, t.angle, false );
     }
     
 }
