@@ -21,9 +21,13 @@ public class LevelRenderer implements Screen{
     private final LevelModel model;
     
     public LevelRenderer(Gallaga game){
+       
         _backgroundImg = new Texture("background.png");
+        
         model = new LevelModel();
-        this.game = game;
+        GameObject.setLevelModel(model);
+        
+        this.game = game; 
     }    
     private Texture _backgroundImg;
     private float backgroundX = 0;
@@ -32,13 +36,23 @@ public class LevelRenderer implements Screen{
     
     @Override
     public void show() {
+        
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
+    private boolean isBackgroundOut(){
+        return backgroundX + _backgroundImg.getWidth() < Gdx.graphics.getWidth();
     }
 
     @Override
     public void render(float f) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-	Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Gdx.gl.glClearColor(0, 0, 0, 1);
+	//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+        if (isBackgroundOut())
+            backgroundX = 0f;
         
         // обновление модели
         model.update(f);

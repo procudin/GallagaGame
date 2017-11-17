@@ -28,7 +28,7 @@ public class LevelModel {
     private SpaceShip player;  
     
     public LevelModel(){
-        gameSpeed = 17f;
+        gameSpeed = 100f;
         
         height = Gdx.graphics.getHeight();
         width = Gdx.graphics.getWidth();
@@ -45,10 +45,6 @@ public class LevelModel {
         
         // добавляем его в объекты
         _objects.add(player);
-        
-        
-        
-        
     }
     
     public void update(float delta){
@@ -76,5 +72,4 @@ public class LevelModel {
         
         disposableObjects.clear();
     }
-    
 }
