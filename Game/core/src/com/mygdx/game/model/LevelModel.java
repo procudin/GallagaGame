@@ -53,6 +53,11 @@ public class LevelModel {
         
         // обновляем текущие
         for (GameObject obj : _objects){
+            if (obj.isOutOfWindow()){
+                obj.dispose();
+                continue;
+            }
+            
             obj.update(delta);
         }
     }
