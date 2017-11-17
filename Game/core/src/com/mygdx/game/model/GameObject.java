@@ -12,16 +12,20 @@ import java.util.HashMap;
  *
  * @author Admin
  */
-public abstract class GameObject extends Component{    
+public abstract class GameObject extends Component{  
+    /**************************Модель уровня*******************************/
+    protected static LevelModel levelModel;
+    public static void setLevelModel(LevelModel model) { levelModel = model; }    
+    
+    /******************************Компонент Transform****************************************/
     private Transform _transform;    
     public Transform transform(){return _transform;}
     public void setTransform(Transform t){  _transform = t;  _transform._object = this;  }
     
+    /******************************Компонент Renderer****************************************/
     private Renderer _renderer;
     public Renderer renderer() { return _renderer;}
     public void setRenderer(Renderer r) { _renderer = r;  _renderer._object = this; }
-    
-    
     
     // Конструктор
     public GameObject(){
@@ -37,8 +41,18 @@ public abstract class GameObject extends Component{
         }
     }    
     
-    /*******************Компоненты***************//////////
+    @Override
+    public void dispose(){
+        levelModel.addDisposableObject(this);        
+    }
     
+    
+    public boolean isOutOfWindow(){
+        return _transform.X < -levelModel.width/10 || _transform.X > levelModel.width * 1.1 
+                || _transform.Y < -levelModel.height/5 || _transform.Y > levelModel.height * 1.2;
+    }    
+    
+    /*******************Работа с компонентами*********************************************/    
     public Component getComponent(Class componentclass){        
         for (Class key : _components.keySet()){
             if (componentclass.isAssignableFrom(key)){
@@ -70,18 +84,8 @@ public abstract class GameObject extends Component{
                 return;
             }
         }
-    }
-    
+    }  
     
     private HashMap<Class,Component> _components = new HashMap<Class,Component>();
-    
-    //************************************* все объекты/////////////////////////////////////////////
-    private static void addObject(GameObject obj){
-        allObjects.put(ID++, obj);
-    }
-    
-    
-    private static int ID = 0;
-    private static HashMap<Integer,GameObject> allObjects;
 }
     
