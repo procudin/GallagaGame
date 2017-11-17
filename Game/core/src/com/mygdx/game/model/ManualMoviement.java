@@ -14,6 +14,11 @@ import com.badlogic.gdx.Input.Keys;
  */
 public class ManualMoviement extends Movement{
     
+    
+    public ManualMoviement(float speed) {
+        super(speed);
+    }
+    
     public static boolean isOutOfWindow(Transform t){        
         int height = Gdx.graphics.getHeight();
         int width = Gdx.graphics.getWidth();

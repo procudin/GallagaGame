@@ -22,6 +22,8 @@ public abstract class Bullet extends GameObject{
         _damage = damage;
     }    
     
-    private final float _damage;
+    private float _damage;
     public float damage(){return _damage;}
+    public void setDamage(float damage) {_damage = damage; }
+    
 }

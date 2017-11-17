@@ -5,6 +5,7 @@
  */
 package com.mygdx.game.model;
 
+import com.mygdx.game.view.Renderer;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
@@ -12,14 +13,30 @@ import com.mygdx.game.view.SpriteRenderer;
  * @author Admin
  */
 public class StraightShootingSpaceship extends SpaceShip{
-    public StraightShootingSpaceship() {
-        super(1000, 1);
+    
+    public StraightShootingSpaceship(int lifes,boolean fromLeftToRightDirection) {
+        super(1000, lifes);
         
-        transform().X = -10 ;
-        transform().Y = 40 ;
-        transform().angle = 180f;
+        transform().angle = fromLeftToRightDirection ? 180f : 0f ;
+        
+        this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));        
+        this.setComponent(Movement.class,new StraightMovement(fromLeftToRightDirection));
+        this.setComponent(Gun.class,new Gun(this,25,0,0.1f,"StraightFlyingBullet",fromLeftToRightDirection));
+    }
+    
+    public StraightShootingSpaceship(Transform inirialpos,int lifes,boolean fromLeftToRightDirection) {
+        super(1000, lifes);
+        
+        this.setTransform(inirialpos);
+        
+        transform().angle = fromLeftToRightDirection ? 180f : 0f ;
         
         this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));
-        this.setComponent(new ManualMoviement());
+        this.setComponent(Movement.class,new StraightMovement(fromLeftToRightDirection));
+        this.setComponent(Gun.class,new Gun(this,25,0,0.1f,"StraightFlyingBullet",fromLeftToRightDirection));
+    }
+    
+    public StraightShootingSpaceship(boolean fromLeftToRightDirection) {
+        this(1,fromLeftToRightDirection);
     }
 }

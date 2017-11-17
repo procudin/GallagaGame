@@ -47,6 +47,15 @@ public class Transform extends Component{
         this.r = (float)Math.sqrt(width * width + height+height)/2;
     }
     
+    public Transform(float X, float Y,float angle){
+        this.X = X;
+        this.Y = Y;
+        this.width = 10;
+        this.height = 10;
+        this.angle = angle;
+        this.r = (float)Math.sqrt(width * width + height+height)/2;
+    }
+    
     public Transform(){
         this.X = 0;
         this.Y = 0;

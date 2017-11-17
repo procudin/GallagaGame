@@ -23,4 +23,7 @@ public abstract class SpaceShip extends GameObject{
     
     private final float _health;    public float health(){ return _health;}
     private final int _lifes;       public int lifes(){ return _lifes;}
+    
+    
+    
 }

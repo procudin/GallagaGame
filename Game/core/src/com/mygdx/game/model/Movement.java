@@ -9,23 +9,15 @@ package com.mygdx.game.model;
  *
  * @author Admin
  */
-public abstract class Movement extends Component{
+public abstract class Movement extends Component{    
     
-    protected void movieUp(){
-        
+    public Movement(){
+        this(10f);
     }
     
-    protected void movieLeft(){
-        
+    public Movement(float speed){
+        this.speed = speed;
     }
     
-    protected void movieDown(){
-        
-    }
-    
-    protected void movieRight(){
-        
-    }
-    
-    public float speed = 100f;    
+    public float speed;    
 }

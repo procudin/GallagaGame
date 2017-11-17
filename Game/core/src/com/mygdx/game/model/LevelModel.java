@@ -23,7 +23,7 @@ public class LevelModel {
     
     /************************ Объекты игрового поля ************************************/
     private LinkedList<GameObject> _objects = new LinkedList<GameObject>();    
-    public LinkedList<GameObject> objects() { return _objects;}    
+    public LinkedList<GameObject> objects() { return _objects;} 
     
     private SpaceShip player;  
     
@@ -51,6 +51,8 @@ public class LevelModel {
         // удаляем старые объекты
         dispose();
         
+        add();
+        
         // обновляем текущие
         for (GameObject obj : _objects){
             if (obj.isOutOfWindow()){
@@ -77,4 +79,18 @@ public class LevelModel {
         
         disposableObjects.clear();
     }
+    
+    /***********************Добавление объектов*******************************/
+    private LinkedList<GameObject> addingObjects = new LinkedList<GameObject>();
+    
+    public void addObject(GameObject obj){
+        addingObjects.add(obj);
+    }
+    
+    private void add(){
+        for (GameObject o : addingObjects){
+            _objects.add(o);
+        }
+    }
 }
+   

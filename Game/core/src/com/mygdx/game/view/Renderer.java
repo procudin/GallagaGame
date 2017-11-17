@@ -13,6 +13,7 @@ import com.mygdx.game.model.*;
  *
  * @author Admin
  */
-public abstract class Renderer extends Component{    
+public abstract class Renderer extends Component{        
+    public boolean isActive = true;
     public abstract void render(float delta, SpriteBatch batch);
 }
