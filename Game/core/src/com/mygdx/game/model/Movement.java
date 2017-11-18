@@ -12,7 +12,7 @@ package com.mygdx.game.model;
 public abstract class Movement extends Component{    
     
     public Movement(){
-        this(10f);
+        this(2f);
     }
     
     public Movement(float speed){

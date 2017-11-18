@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
  *
@@ -38,7 +39,7 @@ public class LevelModel {
     
     private void init(){
         // добаляем корабль игрока
-        player = new StraightShootingSpaceship(new Transform(Gdx.graphics.getWidth() / 12,Gdx.graphics.getHeight()/ 2),3,true);
+        player = new StraightShootingSpaceship(new Transform(Gdx.graphics.getWidth() / 12,Gdx.graphics.getHeight()/ 2),3,true,0.33f,50f);
                 
         // добавляем компоненту ручного управления 
         player.setComponent(Movement.class,new ManualMoviement(200));
@@ -48,9 +49,14 @@ public class LevelModel {
     }
     
     public void update(float delta){
+        
+        //генерируем врагов
+        generateEnemies(delta);
+        
         // удаляем старые объекты
         dispose();
         
+        // Добавляем новые
         add();
         
         // обновляем текущие
@@ -64,6 +70,35 @@ public class LevelModel {
         }
     }
     
+    
+    /**************************************Генерация врагов*********************************************/
+    
+    private float spawnTimeout = 2f;
+    private float lastSpawnTime = 0f;
+    private float minSpawnY = Gdx.graphics.getHeight() * 0.2f;
+    private float maxSpawnY = Gdx.graphics.getHeight() * 0.8f;
+    private float spawnX = Gdx.graphics.getWidth() * 1.2f;
+    private final Random random = new Random();
+    
+    private void generateEnemies(float delta){
+        lastSpawnTime+=delta;
+                
+        if (lastSpawnTime<spawnTimeout){
+            return;
+        }        
+        
+        // сгенерировать вражеский корабль
+        SpaceShip ship = SpaceShipFactory.getSpaceShip("StraightShootingSpaceship", false,1,0.7f,30f);
+        
+        // задаем начальную позицию
+        ship.transform().X = spawnX;
+        ship.transform().Y = random.nextInt((int)(maxSpawnY - minSpawnY)) + minSpawnY;
+        
+        //добавляем в активные объекты
+        _objects.add(ship);
+        
+        lastSpawnTime = 0f;
+    }    
     
     /******************Удаление объектов*************/
     private LinkedList<GameObject> disposableObjects = new LinkedList<GameObject>();

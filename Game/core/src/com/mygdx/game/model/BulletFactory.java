@@ -13,7 +13,7 @@ public class BulletFactory {
     
     public static Bullet getBullet(String bulletType,boolean isFromLeftToRight){
         if (bulletType.equals("StraightFlyingBullet")){
-            return new StraightFlyingBullet(100,50,isFromLeftToRight);
+            return new StraightFlyingBullet(100,20f,isFromLeftToRight);
         }       
         
         
