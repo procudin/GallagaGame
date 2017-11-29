@@ -5,6 +5,8 @@
  */
 package com.mygdx.game.model;
 
+import com.mygdx.game.model.GameObject;
+
 /**
  *
  * @author Admin

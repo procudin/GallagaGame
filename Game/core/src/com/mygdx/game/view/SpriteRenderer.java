@@ -21,6 +21,8 @@ public class SpriteRenderer extends Renderer{
         
         width  = sprite.getWidth();
         height = sprite.getHeight();
+        width2 = width/2;
+        height2 = height/2;
     }
     
     public SpriteRenderer(String assetName, int width, int height) {       
@@ -28,19 +30,22 @@ public class SpriteRenderer extends Renderer{
         sprite = new Sprite(new Texture(assetName),width,height);        
         this.width  = sprite.getWidth();
         this.height = sprite.getHeight();
+        width2 = width/2;
+        height2 = height/2;
     }
     
     
     private Sprite sprite;    
     private float width;
     private float height;
-    
+    private float width2;
+    private float height2;
     
     
     @Override
     public void render(float delta, SpriteBatch batch){
         Transform t = _object.transform();        
-        batch.draw(sprite, t.X - (width)/2 , t.Y - (height)/2 ,(width)/2,(height)/2,width,height,1, 1, t.angle, false );
+        batch.draw(sprite, t.X - width2 , t.Y - height2 ,width2,height2,width,height,1, 1, t.angle, false );
     }
     
 }

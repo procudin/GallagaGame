@@ -32,16 +32,7 @@ public class LevelRenderer implements Screen{
     private Texture _backgroundImg;
     private float backgroundX = 0;
     private float backgroundY = 0;
-    
-    
-    @Override
-    public void show() {
         
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
     private boolean isBackgroundOut(){
         return backgroundX + _backgroundImg.getWidth() < Gdx.graphics.getWidth();
     }
@@ -86,6 +77,9 @@ public class LevelRenderer implements Screen{
     @Override
     public void hide() {}
 
+    @Override
+    public void show() { }
+    
     @Override
     public void dispose() {
         this._backgroundImg.dispose();
