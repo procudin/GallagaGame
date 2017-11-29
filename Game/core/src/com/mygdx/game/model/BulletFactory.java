@@ -11,11 +11,14 @@ package com.mygdx.game.model;
  */
 public class BulletFactory {  
     
-    public static Bullet getBullet(String bulletType,boolean isFromLeftToRight){
+    public static Bullet getBullet(String bulletType,float bulletSpeed,boolean isFromLeftToRight){
         if (bulletType.equals("StraightFlyingBullet")){
-            return new StraightFlyingBullet(100,20f,isFromLeftToRight);
+            return new StraightFlyingBullet(100,bulletSpeed,isFromLeftToRight);
         }       
         
+        if (bulletType.equals("PlayerBullet")){
+            return new PlayerBullet(100,bulletSpeed,isFromLeftToRight);
+        }       
         
         return null;
     }

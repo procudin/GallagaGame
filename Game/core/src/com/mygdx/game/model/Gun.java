@@ -10,7 +10,7 @@ package com.mygdx.game.model;
  * @author Admin
  */
 public class Gun extends Component{    
-    public Gun(SpaceShip parent,float ofsetX, float ofsetY,float fireRate,String bulletType,boolean isFromLeftToRightDirection){
+    public Gun(SpaceShip parent,float ofsetX, float ofsetY,float fireRate,String bulletType,float bulletSpeed,boolean isFromLeftToRightDirection){
         this.parent = parent;
         this.isFromLeftToRightDirection = isFromLeftToRightDirection;
         this.ofsetX = ofsetX;
@@ -18,6 +18,7 @@ public class Gun extends Component{
         this.fireRate = fireRate;
         this.bulletType = bulletType;
         this.time=0f;
+        this.bulletSpeed = bulletSpeed;
     }
     
     public boolean isEnable = true;
@@ -28,6 +29,7 @@ public class Gun extends Component{
     private float ofsetY;
     private boolean isFromLeftToRightDirection;
     public float fireRate;
+    public float bulletSpeed;
     
     public String bulletType;
     
@@ -42,10 +44,10 @@ public class Gun extends Component{
             return;
         }
         
-        Bullet newB = BulletFactory.getBullet(bulletType,isFromLeftToRightDirection);        
+        Bullet newB = BulletFactory.getBullet(bulletType,bulletSpeed,isFromLeftToRightDirection);        
         
         newB.transform().X=ofsetX + parent.transform().X;
-        newB.transform().Y=ofsetY + + parent.transform().Y;
+        newB.transform().Y=ofsetY + parent.transform().Y;
         newB.transform().angle = isFromLeftToRightDirection? 180 : 0;
         
         GameObject.levelModel.addObject(newB);

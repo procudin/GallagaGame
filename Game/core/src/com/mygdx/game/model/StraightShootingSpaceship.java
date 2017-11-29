@@ -14,17 +14,17 @@ import com.mygdx.game.view.SpriteRenderer;
  */
 public class StraightShootingSpaceship extends SpaceShip{
     
-    public StraightShootingSpaceship(int lifes,boolean fromLeftToRightDirection,float fireRate,float speed) {
+    public StraightShootingSpaceship(int lifes,boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
         super(1000, lifes);
         
         transform().angle = fromLeftToRightDirection ? 180f : 0f ;
         
         this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));        
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
-        this.setComponent(Gun.class,new Gun(this,fromLeftToRightDirection?25:-25,0,fireRate,"StraightFlyingBullet",fromLeftToRightDirection));
+        this.setComponent(Gun.class,new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
     }
     
-    public StraightShootingSpaceship(Transform initialpos,int lifes,boolean fromLeftToRightDirection,float fireRate,float speed) {
+    public StraightShootingSpaceship(Transform initialpos,int lifes,boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
         super(1000, lifes);
         
         this.setTransform(initialpos);
@@ -33,10 +33,10 @@ public class StraightShootingSpaceship extends SpaceShip{
         
         this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
-        this.setComponent(Gun.class,new Gun(this,fromLeftToRightDirection?25:-25,0,fireRate,"StraightFlyingBullet",fromLeftToRightDirection));
+        this.setComponent(Gun.class,new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
     }
     
-    public StraightShootingSpaceship(boolean fromLeftToRightDirection,float fireRate,float speed) {
-        this(1,fromLeftToRightDirection,fireRate,speed);
+    public StraightShootingSpaceship(boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
+        this(1,fromLeftToRightDirection,fireRate,speed,bulletSpeed);
     }
 }

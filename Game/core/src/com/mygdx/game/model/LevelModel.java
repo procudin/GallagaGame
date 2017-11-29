@@ -42,11 +42,8 @@ public class LevelModel {
     
     private void init(){
         // добаляем корабль игрока
-        player = new StraightShootingSpaceship(new Transform(Gdx.graphics.getWidth() / 12,Gdx.graphics.getHeight()/ 2),3,true,0.33f,50f);
+        player = new PlayerSpaceship(new Transform(Gdx.graphics.getWidth() / 12,Gdx.graphics.getHeight()/ 2),3,true,0.1f,190f,200f);
                 
-        // добавляем компоненту ручного управления 
-        player.setComponent(Movement.class,new ManualMoviement(200));
-        
         // добавляем его в объекты
         _objects.add(player);
     }
@@ -89,7 +86,7 @@ public class LevelModel {
         }        
         
         // сгенерировать вражеский корабль
-        SpaceShip ship = SpaceShipFactory.getSpaceShip("StraightShootingSpaceship", false,1,0.7f,30f);
+        SpaceShip ship = SpaceShipFactory.getSpaceShip("StraightShootingSpaceship",false,1,1f,100f,250f);
         
         // задаем начальную позицию
         ship.transform().X = spawnX;
