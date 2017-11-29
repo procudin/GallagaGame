@@ -41,15 +41,19 @@ public abstract class GameObject extends Component{
         }
     }    
     
-    @Override
+    
+    
+    private boolean disposed = false;
+    public boolean disposed(){ return disposed;}
+    @Override    
     public void dispose(){
-        levelModel.addDisposableObject(this);        
+        disposed = true;        
     }
     
     
     public boolean isOutOfWindow(){
-        return _transform.X < -levelModel.width/2 || _transform.X > levelModel.width * 1.5 
-                || _transform.Y < -levelModel.height/2 || _transform.Y > levelModel.height * 1.5;
+        return _transform.X < -levelModel.width/4 || _transform.X > levelModel.width * 1.5 
+                || _transform.Y < -levelModel.height/3 || _transform.Y > levelModel.height * 1.5;
     }    
     
     /*******************Работа с компонентами*********************************************/    
