@@ -86,7 +86,7 @@ public class LevelModel {
         }        
         
         // сгенерировать вражеский корабль
-        SpaceShip ship = SpaceShipFactory.getSpaceShip("StraightShootingSpaceship",false,1,1f,100f,250f);
+        SpaceShip ship = generateRandomShip();
         
         // задаем начальную позицию
         ship.transform().X = spawnX;
@@ -97,6 +97,19 @@ public class LevelModel {
         
         lastSpawnTime = 0f;
     }    
+    
+    private SpaceShip generateRandomShip(){
+        int val = random.nextInt(2);
+        
+        switch (val){
+            case 0:
+                return SpaceShipFactory.getSpaceShip("StraightShootingSpaceship",false,1,1f,100f,250f);
+            case 1:
+                return SpaceShipFactory.getSpaceShip("BigSpaceShip",false,1,1f,50f,250f);
+        }
+        
+        return null;
+    }
     
     /***********************Добавление объектов*******************************/
     private LinkedList<GameObject> addingObjects = new LinkedList<GameObject>();

@@ -5,16 +5,20 @@
  */
 package com.mygdx.game.model;
 
+import com.mygdx.game.view.SpriteRenderer;
+
 /**
  *
  * @author Admin
  */
 public class BigSpaceShip extends SpaceShip{
     
-    public BigSpaceShip() {
-        super(5000,0);
+    public BigSpaceShip(int lifes,boolean fromLeftToRightDirection,float speed) {
+        super(5000,lifes);
         
+        transform().angle = fromLeftToRightDirection ? 180f : 0f ;
         
+        this.setRenderer(new SpriteRenderer("BigSpaceship.png"));
+        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
     }
-    
 }

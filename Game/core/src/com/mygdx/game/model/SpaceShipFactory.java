@@ -16,6 +16,10 @@ public class SpaceShipFactory {
             return new StraightShootingSpaceship(lifes,isFromLeftToRight,fireRate,speed,bulletSpeed);
         }
         
+        if (spaceshipType.equals("BigSpaceShip")){
+            return new BigSpaceShip(lifes,isFromLeftToRight,speed);
+        }
+        
         return null;
     }
 }

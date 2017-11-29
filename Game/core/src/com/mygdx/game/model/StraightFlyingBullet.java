@@ -18,11 +18,12 @@ public class StraightFlyingBullet extends Bullet {
         
         this.setTransform(initialpos);
         
-        this.setComponent(Movement.class,new StraightMovement(fromLeftToRightDirection));
-        this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
         this.transform().angle = fromLeftToRightDirection ? 180 : 0;
         this.transform().width = 14;
         this.transform().height = 11;
+        
+        this.setComponent(Movement.class,new StraightMovement(fromLeftToRightDirection));
+        this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
     }
     
     public StraightFlyingBullet(float damage,float speed,Transform initialpos,boolean fromLeftToRightDirection){
@@ -30,20 +31,23 @@ public class StraightFlyingBullet extends Bullet {
         
         this.setTransform(initialpos);
         
-        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
-        this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
         this.transform().angle = fromLeftToRightDirection ? 180 : 0;
         this.transform().width = 14;
         this.transform().height = 11;
+        
+        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
+        this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
+        
     }
     
     public StraightFlyingBullet(float damage,float speed,boolean fromLeftToRightDirection){
         super(damage);        
         
-        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
-        this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
         this.transform().angle = fromLeftToRightDirection ? 180 : 0;
         this.transform().width = 14;
         this.transform().height = 11;
+        
+        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
+        this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
     }
 }
