@@ -32,7 +32,7 @@ public class LevelModel {
     private SpaceShip player;  
     
     public LevelModel(){
-        gameSpeed = 100f;
+        gameSpeed = 30f;
         
         height = Gdx.graphics.getHeight();
         width = Gdx.graphics.getWidth();
@@ -52,20 +52,17 @@ public class LevelModel {
     }
     
     public void update(float delta){
-        
+                
         //генерируем врагов
-        generateEnemies(delta);        
+        generateEnemies(delta); 
         
-        // Добавляем новые объекты
         add();
-        
-        
         
         // обновляем текущие
         _objectsIter = _objects.listIterator();
         while (_objectsIter.hasNext()){
             GameObject obj = _objectsIter.next();
-            if (obj.isOutOfWindow()){
+            if (obj.isOutOfWindow() || obj.disposed()){
                 _objectsIter.remove();
                 continue;
             }
@@ -77,10 +74,10 @@ public class LevelModel {
     
     /**************************************Генерация врагов*********************************************/
     
-    private float spawnTimeout = 1f;
+    private float spawnTimeout = 0.8f;
     private float lastSpawnTime = 0f;
-    private float minSpawnY = Gdx.graphics.getHeight() * 0.2f;
-    private float maxSpawnY = Gdx.graphics.getHeight() * 0.8f;
+    private float minSpawnY = Gdx.graphics.getHeight() * 0.05f;
+    private float maxSpawnY = Gdx.graphics.getHeight() * 0.95f;
     private float spawnX = Gdx.graphics.getWidth() * 1.2f;
     private final Random random = new Random();
     
@@ -99,25 +96,10 @@ public class LevelModel {
         ship.transform().Y = random.nextInt((int)(maxSpawnY - minSpawnY)) + minSpawnY;
         
         //добавляем в активные объекты
-        _objects.add(ship);
+        addObject(ship);
         
         lastSpawnTime = 0f;
     }    
-    
-    /******************Удаление объектов*************/
-//    private LinkedList<GameObject> disposableObjects = new LinkedList<GameObject>();
-//    
-//    public void addDisposableObject(GameObject obj){
-//        disposableObjects.add(obj);
-//    }
-//    
-//    private void dispose(){
-//        for (GameObject o : disposableObjects){
-//            _objects.remove(o);
-//        }
-//        
-//        disposableObjects.clear();
-//    }
     
     /***********************Добавление объектов*******************************/
     private LinkedList<GameObject> addingObjects = new LinkedList<GameObject>();
@@ -126,8 +108,9 @@ public class LevelModel {
         addingObjects.add(obj);
     }
     
-    private void add(){
+    public void add(){
         _objects.addAll(addingObjects);
+        addingObjects.clear();
     }
 }
    
