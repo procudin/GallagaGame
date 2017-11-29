@@ -7,8 +7,10 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.mygdx.game.view.SpriteRenderer;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Random;
 
 /**
@@ -25,6 +27,7 @@ public class LevelModel {
     /************************ Объекты игрового поля ************************************/
     private LinkedList<GameObject> _objects = new LinkedList<GameObject>();    
     public LinkedList<GameObject> objects() { return _objects;} 
+    private ListIterator<GameObject> _objectsIter;
     
     private SpaceShip player;  
     
@@ -51,18 +54,19 @@ public class LevelModel {
     public void update(float delta){
         
         //генерируем врагов
-        generateEnemies(delta);
+        generateEnemies(delta);        
         
-        // удаляем старые объекты
-        dispose();
-        
-        // Добавляем новые
+        // Добавляем новые объекты
         add();
         
+        
+        
         // обновляем текущие
-        for (GameObject obj : _objects){
+        _objectsIter = _objects.listIterator();
+        while (_objectsIter.hasNext()){
+            GameObject obj = _objectsIter.next();
             if (obj.isOutOfWindow()){
-                obj.dispose();
+                _objectsIter.remove();
                 continue;
             }
             
@@ -73,7 +77,7 @@ public class LevelModel {
     
     /**************************************Генерация врагов*********************************************/
     
-    private float spawnTimeout = 2f;
+    private float spawnTimeout = 1f;
     private float lastSpawnTime = 0f;
     private float minSpawnY = Gdx.graphics.getHeight() * 0.2f;
     private float maxSpawnY = Gdx.graphics.getHeight() * 0.8f;
@@ -101,19 +105,19 @@ public class LevelModel {
     }    
     
     /******************Удаление объектов*************/
-    private LinkedList<GameObject> disposableObjects = new LinkedList<GameObject>();
-    
-    public void addDisposableObject(GameObject obj){
-        disposableObjects.add(obj);
-    }
-    
-    private void dispose(){
-        for (GameObject o : disposableObjects){
-            _objects.remove(o);
-        }
-        
-        disposableObjects.clear();
-    }
+//    private LinkedList<GameObject> disposableObjects = new LinkedList<GameObject>();
+//    
+//    public void addDisposableObject(GameObject obj){
+//        disposableObjects.add(obj);
+//    }
+//    
+//    private void dispose(){
+//        for (GameObject o : disposableObjects){
+//            _objects.remove(o);
+//        }
+//        
+//        disposableObjects.clear();
+//    }
     
     /***********************Добавление объектов*******************************/
     private LinkedList<GameObject> addingObjects = new LinkedList<GameObject>();
@@ -123,9 +127,7 @@ public class LevelModel {
     }
     
     private void add(){
-        for (GameObject o : addingObjects){
-            _objects.add(o);
-        }
+        _objects.addAll(addingObjects);
     }
 }
    
