@@ -7,6 +7,7 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.view.SpriteRenderer;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -24,10 +25,10 @@ public class LevelModel {
     public final int width;
     
     
-    /************************ Объекты игрового поля ************************************/
-    private LinkedList<GameObject> _objects = new LinkedList<GameObject>();    
-    public LinkedList<GameObject> objects() { return _objects;} 
-    private ListIterator<GameObject> _objectsIter;
+    /************************ Объекты игрового поля ************************************/    
+    private LinkedList<SpaceShip> enemies = new LinkedList<SpaceShip>();
+    private LinkedList<Bullet> playerBullets = new LinkedList<Bullet>();
+    private LinkedList<Bullet> enemieBullets = new LinkedList<Bullet>();
     
     private SpaceShip player;  
     
@@ -43,31 +44,94 @@ public class LevelModel {
     private void init(){
         // добаляем корабль игрока
         player = new PlayerSpaceship(new Transform(Gdx.graphics.getWidth() / 12,Gdx.graphics.getHeight()/ 2),3,true,0.1f,190f,200f);
-                
-        // добавляем его в объекты
-        _objects.add(player);
     }
     
-    public void update(float delta){
-                
-        //генерируем врагов
-        generateEnemies(delta); 
-        
-        add();
-        
-        // обновляем текущие
-        _objectsIter = _objects.listIterator();
-        while (_objectsIter.hasNext()){
-            GameObject obj = _objectsIter.next();
-            if (obj.isOutOfWindow() || obj.disposed()){
-                _objectsIter.remove();
-                continue;
-            }
-            
-            obj.update(delta);
+    
+    public void addBullet(Bullet bullet){
+        if (bullet.senderShip() == player){
+            playerBullets.add(bullet);
+        }else{
+            enemieBullets.add(bullet);        
         }
     }
     
+    private void updatePlayerBullets(float delta){
+        ListIterator<Bullet> iter = playerBullets.listIterator();
+        
+        while (iter.hasNext()){
+            Bullet bul = iter.next();
+            
+            if (bul.isOutOfWindow() || bul.disposed()){
+                iter.remove();
+                continue;
+            }
+            
+            bul.update(delta);
+        }
+    }    
+    private void updateEnemieBullets(float delta){
+        ListIterator<Bullet> iter = enemieBullets.listIterator();
+        
+        while (iter.hasNext()){
+            Bullet bul = iter.next();
+            
+            if (bul.isOutOfWindow() || bul.disposed()){
+                iter.remove();
+                continue;
+            }
+            
+            bul.update(delta);
+        }
+    }    
+    private void updateEnemies(float delta){
+        ListIterator<SpaceShip> iter = enemies.listIterator();
+        
+        while (iter.hasNext()){
+            SpaceShip ship = iter.next();
+            
+            if (ship.isOutOfWindow() || ship.disposed()){
+                iter.remove();
+                continue;
+            }
+            
+            ship.update(delta);
+        }
+    }        
+    public void update(float delta){
+       //генерируем врагов
+        generateEnemies(delta); 
+        
+        // обновляем игрока и врагов
+        updateEnemies(delta);
+        player.update(delta);
+        
+        //обновляем пули
+        updateEnemieBullets(delta); 
+        updatePlayerBullets(delta);
+    }
+    
+    public void updateRenderer(float delta,SpriteBatch batch){
+        // отрисовать врагов
+        ListIterator<SpaceShip> iter = enemies.listIterator();        
+        while (iter.hasNext()){
+            iter.next().renderer().render(delta, batch);
+        }
+        
+        // отрисоватьб пули врагов
+        ListIterator<Bullet> iter1 = enemieBullets.listIterator();        
+        while (iter1.hasNext()){
+            iter1.next().renderer().render(delta, batch);
+        }
+        
+        //отрисовать пули игрока
+        iter1 = playerBullets.listIterator();        
+        while (iter1.hasNext()){
+            iter1.next().renderer().render(delta, batch);
+        }
+        
+        // отрисовать игрока
+        player.renderer().render(delta, batch);
+    }
     
     /**************************************Генерация врагов*********************************************/
     
@@ -93,7 +157,7 @@ public class LevelModel {
         ship.transform().Y = random.nextInt((int)(maxSpawnY - minSpawnY)) + minSpawnY;
         
         //добавляем в активные объекты
-        addObject(ship);
+        enemies.add(ship);
         
         lastSpawnTime = 0f;
     }    
@@ -109,18 +173,6 @@ public class LevelModel {
         }
         
         return null;
-    }
-    
-    /***********************Добавление объектов*******************************/
-    private LinkedList<GameObject> addingObjects = new LinkedList<GameObject>();
-    
-    public void addObject(GameObject obj){
-        addingObjects.add(obj);
-    }
-    
-    public void add(){
-        _objects.addAll(addingObjects);
-        addingObjects.clear();
     }
 }
    
