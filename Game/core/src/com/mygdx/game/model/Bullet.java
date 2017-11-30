@@ -10,15 +10,15 @@ package com.mygdx.game.model;
  * @author Admin
  */
 public abstract class Bullet extends GameObject{
-    protected Bullet(){
+    protected Bullet(SpaceShip sender){
         super();       
-        
+        this.sender = sender;
         _damage = 100f;
     }
     
-    protected Bullet(float damage){
+    protected Bullet(float damage,SpaceShip sender){
         super();       
-        
+        this.sender = sender;
         _damage = damage;
     }    
     
@@ -26,4 +26,6 @@ public abstract class Bullet extends GameObject{
     public float damage(){return _damage;}
     public void setDamage(float damage) {_damage = damage; }
     
+    private SpaceShip sender;
+    public SpaceShip senderShip() { return sender;}
 }

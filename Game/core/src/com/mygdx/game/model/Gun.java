@@ -44,13 +44,13 @@ public class Gun extends Component{
             return;
         }
         
-        Bullet newB = BulletFactory.getBullet(bulletType,bulletSpeed,isFromLeftToRightDirection);        
+        Bullet newB = BulletFactory.getBullet(parent,bulletType,bulletSpeed,isFromLeftToRightDirection);        
         
         newB.transform().X=ofsetX + parent.transform().X;
         newB.transform().Y=ofsetY + parent.transform().Y;
         newB.transform().angle = isFromLeftToRightDirection? 180 : 0;
         
-        GameObject.levelModel.addObject(newB);
+        GameObject.levelModel.addBullet(newB);
         time=0;
     }
     

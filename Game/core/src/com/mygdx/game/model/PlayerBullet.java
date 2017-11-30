@@ -12,10 +12,14 @@ import com.mygdx.game.view.SpriteRenderer;
  * @author Admin
  */
 public class PlayerBullet extends Bullet{
-    public PlayerBullet(float damage,float speed,boolean fromLeftToRightDirection){
-        super(damage);        
+    public PlayerBullet(SpaceShip sender,float damage,float speed,boolean fromLeftToRightDirection){
+        super(damage,sender);        
+        
+        this.transform().angle = fromLeftToRightDirection ? 180 : 0;
+        this.transform().width = 14;
+        this.transform().height = 11;
+        
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
         this.setRenderer(new SpriteRenderer("StraightFlyingBullet.png"));
-        this.transform().angle = fromLeftToRightDirection ? 180 : 0;
     }
 }
