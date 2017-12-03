@@ -69,11 +69,12 @@ public class LevelModel {
         }        
     }
     
-//    private void checkEnemieBulletCollisions(Bullet bul){ 
-//        if (player.transform().isCollision()){
-//            
-//        }
-//    }
+    private void checkEnemieBulletCollisions(Bullet bul){ 
+        if (player.transform().isCollision(bul.transform())){
+            player.hit(bul.damage());
+            bul.dispose();
+        }
+    }
     
     private void updatePlayerBullets(float delta){
         ListIterator<Bullet> iter = playerBullets.listIterator();
@@ -81,6 +82,7 @@ public class LevelModel {
         while (iter.hasNext()){
             Bullet bul = iter.next();
             
+            // проверить столкновение с врагами
             checkPlayerBulletCollisions(bul);
             
             if (isOutOfWindow(bul) || bul.disposed()){
@@ -96,6 +98,9 @@ public class LevelModel {
         
         while (iter.hasNext()){
             Bullet bul = iter.next();
+            
+            //проверить столкновение с игроком
+            checkEnemieBulletCollisions(bul);
             
             if (isOutOfWindow(bul) || bul.disposed()){
                 iter.remove();
