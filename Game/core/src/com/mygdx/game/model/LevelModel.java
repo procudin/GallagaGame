@@ -28,9 +28,10 @@ public class LevelModel {
     /************************ Объекты игрового поля ************************************/    
     private LinkedList<SpaceShip> enemies = new LinkedList<SpaceShip>();
     private LinkedList<Bullet> playerBullets = new LinkedList<Bullet>();
-    private LinkedList<Bullet> enemieBullets = new LinkedList<Bullet>();
-    
+    private LinkedList<Bullet> enemieBullets = new LinkedList<Bullet>();    
     private SpaceShip player;  
+    
+    public SpaceShip player() { return player;}
     
     public LevelModel(){
         gameSpeed = 30f;
@@ -125,7 +126,7 @@ public class LevelModel {
         }
     }        
     public void update(float delta){
-       //генерируем врагов
+        //генерируем врагов
         generateEnemies(delta); 
         
         // обновляем игрока и врагов
