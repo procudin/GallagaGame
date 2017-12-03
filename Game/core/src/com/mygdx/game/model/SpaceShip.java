@@ -21,6 +21,18 @@ public abstract class SpaceShip extends GameObject{
         this(health,1);  
     }
     
-    private final float _health;    public float health(){ return _health;}
-    private final int _lifes;       public int lifes(){ return _lifes;}    
+    
+    public void hit(float damage){
+        _health-=damage;
+        
+        if (_health<0){
+            _lifes--;
+            
+            if (_lifes<=0)
+                this.dispose();
+        }
+    }
+    
+    private float _health;    public float health(){ return _health;}
+    private int _lifes;       public int lifes(){ return _lifes;}    
 }
