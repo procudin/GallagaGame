@@ -18,7 +18,7 @@ public class Transform extends Component{
     public float Y;
     public float width;
     public float height;
-    private float r ;
+    public float r ;
         
     public Transform(float X, float Y,float width, float height, float angle){
         this.X = X;
@@ -26,7 +26,7 @@ public class Transform extends Component{
         this.width = width;
         this.height = height;
         this.angle = angle;
-        this.r = (float)Math.sqrt(width * width + height+height)/2;
+        this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
     public Transform(float X, float Y,float width, float height){
@@ -35,7 +35,7 @@ public class Transform extends Component{
         this.width = width;
         this.height = height;
         this.angle = 0;
-        this.r = (float)Math.sqrt(width * width + height+height)/2;
+        this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
     public Transform(float X, float Y){
@@ -44,7 +44,7 @@ public class Transform extends Component{
         this.width = 10;
         this.height = 10;
         this.angle = 0;
-        this.r = (float)Math.sqrt(width * width + height+height)/2;
+        this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
     public Transform(float X, float Y,float angle){
@@ -53,7 +53,7 @@ public class Transform extends Component{
         this.width = 10;
         this.height = 10;
         this.angle = angle;
-        this.r = (float)Math.sqrt(width * width + height+height)/2;
+        this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
     public Transform(){
@@ -62,7 +62,7 @@ public class Transform extends Component{
         this.width = 10;
         this.height = 10;
         this.angle = 0;
-        this.r = (float)Math.sqrt(width * width + height+height)/2;
+        this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
     public boolean isCollision(Transform other){        
