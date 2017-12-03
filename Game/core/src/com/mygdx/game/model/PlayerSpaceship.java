@@ -18,6 +18,7 @@ public class PlayerSpaceship extends SpaceShip{
         super(1000, lifes);
         
         transform().angle = fromLeftToRightDirection ? 180f : 0f ;
+        transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("PlayersSpaceship.png"));        
         this.setComponent(Movement.class,new ManualMoviement(speed));
@@ -30,6 +31,7 @@ public class PlayerSpaceship extends SpaceShip{
         this.setTransform(initialpos);
         
         transform().angle = fromLeftToRightDirection ? 180f : 0f ;
+        transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("PlayersSpaceship.png"));        
         this.setComponent(Movement.class,new ManualMoviement(speed));

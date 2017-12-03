@@ -15,9 +15,10 @@ import com.mygdx.game.view.SpriteRenderer;
 public class StraightShootingSpaceship extends SpaceShip{
     
     public StraightShootingSpaceship(int lifes,boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
-        super(1000, lifes);
+        super(300, lifes);
         
         transform().angle = fromLeftToRightDirection ? 180f : 0f ;
+        transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));        
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
@@ -30,6 +31,7 @@ public class StraightShootingSpaceship extends SpaceShip{
         this.setTransform(initialpos);
         
         transform().angle = fromLeftToRightDirection ? 180f : 0f ;
+        transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));

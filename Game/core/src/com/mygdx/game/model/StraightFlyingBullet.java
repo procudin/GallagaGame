@@ -21,6 +21,7 @@ public class StraightFlyingBullet extends Bullet {
         this.transform().angle = fromLeftToRightDirection ? 180 : 0;
         this.transform().width = 14;
         this.transform().height = 11;
+        this.transform().r = 15;
         
         this.setComponent(Movement.class,new StraightMovement(fromLeftToRightDirection));
         this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
@@ -34,6 +35,7 @@ public class StraightFlyingBullet extends Bullet {
         this.transform().angle = fromLeftToRightDirection ? 180 : 0;
         this.transform().width = 14;
         this.transform().height = 11;
+        this.transform().r = 5;
         
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
         this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
@@ -46,6 +48,7 @@ public class StraightFlyingBullet extends Bullet {
         this.transform().angle = fromLeftToRightDirection ? 180 : 0;
         this.transform().width = 14;
         this.transform().height = 11;
+        this.transform().r = 5;
         
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
         this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));

@@ -43,7 +43,7 @@ public class LevelModel {
     
     private void init(){
         // добаляем корабль игрока
-        player = new PlayerSpaceship(new Transform(Gdx.graphics.getWidth() / 12,Gdx.graphics.getHeight()/ 2),3,true,0.1f,190f,200f);
+        player = new PlayerSpaceship(new Transform(Gdx.graphics.getWidth() / 12,Gdx.graphics.getHeight()/ 2),3,true,0.1f,190f,400f);
     }
     
     
@@ -55,11 +55,33 @@ public class LevelModel {
         }
     }
     
+    
+    private void checkPlayerBulletCollisions(Bullet bul){        
+        ListIterator<SpaceShip> iter = enemies.listIterator();
+        
+        while (iter.hasNext()){
+            SpaceShip enm = iter.next();
+            
+            if (enm.transform().isCollision(bul.transform())){
+                enm.hit(bul.damage());
+                bul.dispose();
+            }
+        }        
+    }
+    
+//    private void checkEnemieBulletCollisions(Bullet bul){ 
+//        if (player.transform().isCollision()){
+//            
+//        }
+//    }
+    
     private void updatePlayerBullets(float delta){
         ListIterator<Bullet> iter = playerBullets.listIterator();
         
         while (iter.hasNext()){
             Bullet bul = iter.next();
+            
+            checkPlayerBulletCollisions(bul);
             
             if (isOutOfWindow(bul) || bul.disposed()){
                 iter.remove();
@@ -135,11 +157,11 @@ public class LevelModel {
     
     /**************************************Генерация врагов*********************************************/
     
-    private float spawnTimeout = 0.01f;
+    private float spawnTimeout = 1f;
     private float lastSpawnTime = 0f;
     private float minSpawnY = Gdx.graphics.getHeight() * 0.05f;
     private float maxSpawnY = Gdx.graphics.getHeight() * 0.95f;
-    private float spawnX = Gdx.graphics.getWidth() * 1.2f;
+    private float spawnX = Gdx.graphics.getWidth() * /*1.2f*/1;
     private final Random random = new Random();
     
     private void generateEnemies(float delta){

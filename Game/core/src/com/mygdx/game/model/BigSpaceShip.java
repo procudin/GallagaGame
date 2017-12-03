@@ -14,9 +14,10 @@ import com.mygdx.game.view.SpriteRenderer;
 public class BigSpaceShip extends SpaceShip{
     
     public BigSpaceShip(int lifes,boolean fromLeftToRightDirection,float speed) {
-        super(5000,lifes);
+        super(500,lifes);
         
         transform().angle = fromLeftToRightDirection ? 180f : 0f ;
+        transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("BigSpaceship.png"));
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
