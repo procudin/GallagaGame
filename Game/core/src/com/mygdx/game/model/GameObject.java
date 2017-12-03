@@ -47,7 +47,8 @@ public abstract class GameObject extends Component{
     public boolean disposed(){ return disposed;}
     @Override    
     public void dispose(){
-        disposed = true;        
+        disposed = true;  
+        _components.clear();
     }
     
     /*******************Работа с компонентами*********************************************/    
