@@ -50,12 +50,6 @@ public abstract class GameObject extends Component{
         disposed = true;        
     }
     
-    
-    public boolean isOutOfWindow(){
-        return _transform.X < -levelModel.width/4 || _transform.X > levelModel.width * 1.5 
-                || _transform.Y < -levelModel.height/3 || _transform.Y > levelModel.height * 1.5;
-    }    
-    
     /*******************Работа с компонентами*********************************************/    
     public Component getComponent(Class componentclass){        
         for (Class key : _components.keySet()){

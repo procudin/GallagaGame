@@ -61,7 +61,7 @@ public class LevelModel {
         while (iter.hasNext()){
             Bullet bul = iter.next();
             
-            if (bul.isOutOfWindow() || bul.disposed()){
+            if (isOutOfWindow(bul) || bul.disposed()){
                 iter.remove();
                 continue;
             }
@@ -75,7 +75,7 @@ public class LevelModel {
         while (iter.hasNext()){
             Bullet bul = iter.next();
             
-            if (bul.isOutOfWindow() || bul.disposed()){
+            if (isOutOfWindow(bul) || bul.disposed()){
                 iter.remove();
                 continue;
             }
@@ -89,7 +89,7 @@ public class LevelModel {
         while (iter.hasNext()){
             SpaceShip ship = iter.next();
             
-            if (ship.isOutOfWindow() || ship.disposed()){
+            if (isOutOfWindow(ship) || ship.disposed()){
                 iter.remove();
                 continue;
             }
@@ -135,7 +135,7 @@ public class LevelModel {
     
     /**************************************Генерация врагов*********************************************/
     
-    private float spawnTimeout = 0.8f;
+    private float spawnTimeout = 0.01f;
     private float lastSpawnTime = 0f;
     private float minSpawnY = Gdx.graphics.getHeight() * 0.05f;
     private float maxSpawnY = Gdx.graphics.getHeight() * 0.95f;
@@ -174,5 +174,12 @@ public class LevelModel {
         
         return null;
     }
+    
+    public boolean isOutOfWindow(GameObject o){
+        Transform t = o.transform();        
+        return t.X < -width/4 || t.X > width * 1.5 
+                || t.Y < -height/3 || t.Y > height * 1.5;
+    }   
+    
 }
    
