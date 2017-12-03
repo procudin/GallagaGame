@@ -57,9 +57,7 @@ public class LevelRenderer implements Screen{
 	game.batch.draw(_backgroundImg, backgroundX, 0);
         
         // обновить объекты
-        for (GameObject o : model.objects()){
-            o.renderer().render(f, game.batch);
-        }
+        model.updateRenderer(f,game.batch);
         
 	game.batch.end();
     }

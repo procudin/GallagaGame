@@ -13,8 +13,8 @@ import com.mygdx.game.view.SpriteRenderer;
  */
 public class StraightFlyingBullet extends Bullet {
     
-    public StraightFlyingBullet(float damage,Transform initialpos,boolean fromLeftToRightDirection){
-        super(damage);
+    public StraightFlyingBullet(SpaceShip sender,float damage,Transform initialpos,boolean fromLeftToRightDirection){
+        super(damage,sender);
         
         this.setTransform(initialpos);
         
@@ -26,8 +26,8 @@ public class StraightFlyingBullet extends Bullet {
         this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
     }
     
-    public StraightFlyingBullet(float damage,float speed,Transform initialpos,boolean fromLeftToRightDirection){
-        super(damage);
+    public StraightFlyingBullet(SpaceShip sender,float damage,float speed,Transform initialpos,boolean fromLeftToRightDirection){
+        super(damage,sender);
         
         this.setTransform(initialpos);
         
@@ -40,8 +40,8 @@ public class StraightFlyingBullet extends Bullet {
         
     }
     
-    public StraightFlyingBullet(float damage,float speed,boolean fromLeftToRightDirection){
-        super(damage);        
+    public StraightFlyingBullet(SpaceShip sender,float damage,float speed,boolean fromLeftToRightDirection){
+        super(damage,sender);        
         
         this.transform().angle = fromLeftToRightDirection ? 180 : 0;
         this.transform().width = 14;
