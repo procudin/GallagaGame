@@ -5,6 +5,10 @@
  */
 package com.mygdx.game.model;
 
+import com.mygdx.game.model.spaceships.PlayerSpaceship;
+import com.mygdx.game.model.bullets.Bullet;
+import com.mygdx.game.model.spaceships.SpaceShip;
+import com.mygdx.game.model.spaceships.SpaceShipFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,6 +17,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Random;
+
+
+enum GameState{
+    GAMEOVER,
+    WIN,
+    INGAME
+}
 
 /**
  *
@@ -23,6 +34,9 @@ public class LevelModel {
      
     public final int height;
     public final int width;
+    
+    private GameState gameStatus = GameState.INGAME;
+    public GameState gameStatus() { return gameStatus;}
     
     
     /************************ Объекты игрового поля ************************************/    
@@ -44,12 +58,12 @@ public class LevelModel {
     
     private void init(){
         // добаляем корабль игрока
-        player = new PlayerSpaceship(new Transform(Gdx.graphics.getWidth() / 12,Gdx.graphics.getHeight()/ 2),3,true,0.1f,190f,400f);
+        player = new PlayerSpaceship(new Transform(Gdx.graphics.getWidth() / 12,Gdx.graphics.getHeight()/ 2),3,true,0.2f,190f,400f);
     }
     
     
     public void addBullet(Bullet bullet){
-        if (bullet.senderShip() == player){
+        if (bullet.sender() == player){
             playerBullets.add(bullet);
         }else{
             enemieBullets.add(bullet);        
@@ -163,7 +177,7 @@ public class LevelModel {
     
     /**************************************Генерация врагов*********************************************/
     
-    private float spawnTimeout = 1f;
+    private float spawnTimeout = 2f;
     private float lastSpawnTime = 0f;
     private float minSpawnY = Gdx.graphics.getHeight() * 0.05f;
     private float maxSpawnY = Gdx.graphics.getHeight() * 0.95f;
@@ -195,9 +209,11 @@ public class LevelModel {
         
         switch (val){
             case 0:
-                return SpaceShipFactory.getSpaceShip("StraightShootingSpaceship",false,1,1f,100f,250f);
+                //return SpaceShipFactory.getSpaceShip("StraightShootingSpaceship",false,1,1f,100f,250f,null);
             case 1:
-                return SpaceShipFactory.getSpaceShip("BigSpaceShip",false,1,1f,50f,250f);
+                //return SpaceShipFactory.getSpaceShip("BigSpaceShip",false,1,1f,50f,250f,null);
+            case 3:
+                return SpaceShipFactory.getSpaceShip("ArcShootingSpaceShip",false,1,1f,50f,250f,player);
         }
         
         return null;

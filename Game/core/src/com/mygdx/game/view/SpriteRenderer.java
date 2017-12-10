@@ -5,6 +5,8 @@
  */
 package com.mygdx.game.view;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,8 +19,8 @@ import com.mygdx.game.model.Transform;
 public class SpriteRenderer extends Renderer{
     
     public SpriteRenderer(String assetName) {               
-        sprite = new Sprite(new Texture(assetName));    
-        
+        texture = new Texture(assetName);
+        sprite = new Sprite(texture);           
         width  = sprite.getWidth();
         height = sprite.getHeight();
         width2 = width/2;
@@ -26,25 +28,29 @@ public class SpriteRenderer extends Renderer{
     }
     
     public SpriteRenderer(String assetName, int width, int height) {       
-        
-        sprite = new Sprite(new Texture(assetName),width,height);        
-        this.width  = sprite.getWidth();
-        this.height = sprite.getHeight();
+        texture = new Texture(assetName);
+        sprite = new Sprite(texture);        
+        this.width  = width;
+        this.height = height;
         width2 = width/2;
         height2 = height/2;
     }
     
-    
+    private Texture texture;
     private Sprite sprite;    
     private float width;
     private float height;
     private float width2;
     private float height2;
     
+    public float alpha = 0.1f;
     
     @Override
     public void render(float delta, SpriteBatch batch){
-        Transform t = _object.transform();        
+        Transform t = _object.transform();    
+        //batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        //batch.enableBlending();
+        //sprite.setAlpha(alpha);
         batch.draw(sprite, t.X - width2 , t.Y - height2 ,width2,height2,width,height,1, 1, t.angle, false );
     }
     

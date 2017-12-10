@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mygdx.game.model;
+package com.mygdx.game.model.spaceships;
 
+import com.mygdx.game.model.Gun;
+import com.mygdx.game.model.ManualMoviement;
+import com.mygdx.game.model.Movement;
+import com.mygdx.game.model.Transform;
+import com.mygdx.game.model.spaceships.SpaceShip;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**

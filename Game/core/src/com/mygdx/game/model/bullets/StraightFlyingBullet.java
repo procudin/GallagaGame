@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mygdx.game.model;
+package com.mygdx.game.model.bullets;
 
+import com.mygdx.game.model.GameObject;
+import com.mygdx.game.model.Movement;
+import com.mygdx.game.model.StraightMovement;
+import com.mygdx.game.model.Transform;
+import com.mygdx.game.model.spaceships.SpaceShip;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
@@ -13,7 +18,7 @@ import com.mygdx.game.view.SpriteRenderer;
  */
 public class StraightFlyingBullet extends Bullet {
     
-    public StraightFlyingBullet(SpaceShip sender,float damage,Transform initialpos,boolean fromLeftToRightDirection){
+    public StraightFlyingBullet(GameObject sender,float damage,Transform initialpos,boolean fromLeftToRightDirection){
         super(damage,sender);
         
         this.setTransform(initialpos);
@@ -27,7 +32,7 @@ public class StraightFlyingBullet extends Bullet {
         this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
     }
     
-    public StraightFlyingBullet(SpaceShip sender,float damage,float speed,Transform initialpos,boolean fromLeftToRightDirection){
+    public StraightFlyingBullet(GameObject sender,float damage,float speed,Transform initialpos,boolean fromLeftToRightDirection){
         super(damage,sender);
         
         this.setTransform(initialpos);
@@ -42,7 +47,7 @@ public class StraightFlyingBullet extends Bullet {
         
     }
     
-    public StraightFlyingBullet(SpaceShip sender,float damage,float speed,boolean fromLeftToRightDirection){
+    public StraightFlyingBullet(GameObject sender,float damage,float speed,boolean fromLeftToRightDirection){
         super(damage,sender);        
         
         this.transform().angle = fromLeftToRightDirection ? 180 : 0;

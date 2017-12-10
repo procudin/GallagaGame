@@ -5,12 +5,16 @@
  */
 package com.mygdx.game.model;
 
+import com.mygdx.game.model.bullets.BulletFactory;
+import com.mygdx.game.model.bullets.Bullet;
+import com.mygdx.game.model.spaceships.SpaceShip;
+
 /**
  *
  * @author Admin
  */
 public class Gun extends Component{    
-    public Gun(SpaceShip parent,float ofsetX, float ofsetY,float fireRate,String bulletType,float bulletSpeed,boolean isFromLeftToRightDirection){
+    public Gun(GameObject parent,float ofsetX, float ofsetY,float fireRate,String bulletType,float bulletSpeed,boolean isFromLeftToRightDirection){
         this.parent = parent;
         this.isFromLeftToRightDirection = isFromLeftToRightDirection;
         this.ofsetX = ofsetX;
@@ -19,11 +23,25 @@ public class Gun extends Component{
         this.bulletType = bulletType;
         this.time=0f;
         this.bulletSpeed = bulletSpeed;
+        this.target = null;
+    }
+    
+    public Gun(GameObject parent,GameObject target,float ofsetX, float ofsetY,float fireRate,String bulletType,float bulletSpeed){
+        this.parent = parent;
+        this.isFromLeftToRightDirection = isFromLeftToRightDirection;
+        this.ofsetX = ofsetX;
+        this.ofsetY= ofsetY;
+        this.fireRate = fireRate;
+        this.bulletType = bulletType;
+        this.time=0f;
+        this.bulletSpeed = bulletSpeed;
+        this.target = target;
     }
     
     public boolean isEnable = true;
     
-    private SpaceShip parent;
+    private GameObject parent;
+    private GameObject target = null;
     
     private float ofsetX;
     private float ofsetY;
@@ -44,11 +62,14 @@ public class Gun extends Component{
             return;
         }
         
-        Bullet newB = BulletFactory.getBullet(parent,bulletType,bulletSpeed,isFromLeftToRightDirection);        
         
-        newB.transform().X=ofsetX + parent.transform().X;
-        newB.transform().Y=ofsetY + parent.transform().Y;
-        newB.transform().angle = isFromLeftToRightDirection? 180 : 0;
+        Transform t = new Transform(ofsetX + parent.transform().X,ofsetY + parent.transform().Y);
+        
+        Bullet newB = BulletFactory.getBullet(t,parent,target,bulletType,bulletSpeed,isFromLeftToRightDirection);        
+        
+        //newB.transform().X=ofsetX + parent.transform().X;
+        //newB.transform().Y=ofsetY + parent.transform().Y;
+        //newB.transform().angle = isFromLeftToRightDirection? 180 : 0;
         
         GameObject.levelModel.addBullet(newB);
         time=0;

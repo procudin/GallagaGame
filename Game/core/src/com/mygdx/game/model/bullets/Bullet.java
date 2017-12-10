@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mygdx.game.model;
+package com.mygdx.game.model.bullets;
+
+import com.mygdx.game.model.GameObject;
+import com.mygdx.game.model.spaceships.SpaceShip;
 
 /**
  *
  * @author Admin
  */
 public abstract class Bullet extends GameObject{
-    protected Bullet(SpaceShip sender){
+    protected Bullet(GameObject sender){
         super();       
         this.sender = sender;
         _damage = 100f;
     }
     
-    protected Bullet(float damage,SpaceShip sender){
+    protected Bullet(float damage,GameObject sender){
         super();       
         this.sender = sender;
         _damage = damage;
@@ -26,6 +29,6 @@ public abstract class Bullet extends GameObject{
     public float damage(){return _damage;}
     public void setDamage(float damage) {_damage = damage; }
     
-    private SpaceShip sender;
-    public SpaceShip senderShip() { return sender;}
+    private GameObject sender;
+    public GameObject sender() { return sender;}
 }
