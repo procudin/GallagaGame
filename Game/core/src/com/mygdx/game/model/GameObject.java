@@ -73,10 +73,10 @@ public abstract class GameObject extends Component{
     }    
     
     public void removeComponent(Component component){
-        removeComponent(component.getClass(),component);
+        removeComponent(component.getClass());
     }
     
-    public void removeComponent(Class componentClass,Component component){
+    public void removeComponent(Class componentClass){
         for (Class key : _components.keySet()){
             if (componentClass.isAssignableFrom(key)){
                 _components.remove(key);
