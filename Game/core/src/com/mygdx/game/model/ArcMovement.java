@@ -18,8 +18,8 @@ public class ArcMovement extends Movement{
     private int targetY;
     private float dx;
     private float dy;
-    private float dxdy;
-    private float dydx;
+    private float dx_diag;
+    private float dy_diag;
     
     
     public void setTarget(int x, int y){
@@ -29,14 +29,18 @@ public class ArcMovement extends Movement{
         dx = targetX - _object.transform().X;
         dy = targetY - _object.transform().Y;
         
-        if (dx > 0)
+        float diag = (float)Math.sqrt(dx * dx + dy*dy);
+        dx_diag = dx / diag;
+        dy_diag = dy / diag;
+        
+        if (dx > 0) 
             _object.dispose();
     }
     
     @Override
     public void update(float delta){        
-        _object.transform().X += speed * delta * dx * 0.005;
-        _object.transform().Y += speed * delta * dy * 0.005;
+        _object.transform().X += speed * delta * dx_diag;
+        _object.transform().Y += speed * delta * dy_diag;
     }
     
 }
