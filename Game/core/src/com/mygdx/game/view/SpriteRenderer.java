@@ -47,6 +47,9 @@ public class SpriteRenderer extends Renderer{
     
     @Override
     public void render(float delta, SpriteBatch batch){
+        if (!isActive)
+            return;
+        
         Transform t = _object.transform();    
         //batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         //batch.enableBlending();
