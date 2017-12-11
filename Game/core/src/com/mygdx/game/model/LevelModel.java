@@ -19,27 +19,41 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Random;
 
-enum GameState {
-    GAMEOVER,
-    WIN,
-    INGAME
-}
+
 
 /**
  *
  * @author Admin
  */
 public class LevelModel {
+    public enum GameState {
+    GAMEOVER,
+    WIN,
+    INGAME
+}
 
     public float gameSpeed;
+    public float gameDuration;
+    public float currentTime;
+    
+    
 
     public final int height;
     public final int width;
 
     private GameState gameStatus = GameState.INGAME;
-
     public GameState gameStatus() {
         return gameStatus;
+    }
+    
+    private void checkGameState(){
+        if (player.disposed()){
+            gameStatus = GameState.GAMEOVER;
+            return;
+        }
+        
+        if (currentTime > gameDuration)
+             gameStatus = GameState.WIN;   
     }
 
     /**
@@ -57,6 +71,9 @@ public class LevelModel {
 
     public LevelModel() {
         gameSpeed = 30f;
+        gameDuration = 60f *5;
+        currentTime = 0f;
+        
 
         height = Gdx.graphics.getHeight();
         width = Gdx.graphics.getWidth();
@@ -168,8 +185,13 @@ public class LevelModel {
     }
 
     public void update(float delta) {
+        currentTime+=delta;
+        
+        //проверяем состояние игры
+        checkGameState();
+        
         //генерируем врагов
-        //generateEnemies(delta);
+        generateEnemies(delta);
 
         // обновляем игрока и врагов
         updateEnemies(delta);
@@ -215,7 +237,7 @@ public class LevelModel {
     /**
      * ************************************Генерация врагов********************************************
      */
-    private float enemieSpawnTimeout = 2f;
+    private float enemieSpawnTimeout = 1f;
     private float enemieLastSpawnTime = 0f;
     private float minSpawnY = Gdx.graphics.getHeight() * 0.05f;
     private float maxSpawnY = Gdx.graphics.getHeight() * 0.95f;
@@ -261,8 +283,8 @@ public class LevelModel {
      * *******************************************Генерация бафов**********************************************************
      */
     
-    private float buffSpawnTimeout = 5f;
-    private float buffLastSpawnTime = 0f;
+    private float buffSpawnTimeout = 40f;
+    private float buffLastSpawnTime = 20f;
     
     private void generateBuffs(float delta) {
         buffLastSpawnTime += delta;
@@ -287,11 +309,11 @@ public class LevelModel {
     private Buff generateRandomBuff(){
         int val = random.nextInt(2);
 
-        switch (/*val*/0) {
+        switch (val) {
             case 0:
                 return BuffFactory.getBuff("FireRateIncrease", player);
             case 1:
-                //return BuffFactory.getBuff("LifeIncrease", player);
+                return BuffFactory.getBuff("LifeIncrease", player);
         }
         
         return null;

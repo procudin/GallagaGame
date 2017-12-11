@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.*;
+import com.mygdx.game.model.LevelModel;
 
 /**
  *
@@ -26,6 +27,8 @@ public class LevelRenderer implements Screen{
        
         _backgroundImg = new Texture("background.png");
         hurtImg = new Texture("heart.png");
+        go = new Texture("go.png");
+        win = new Texture("win.png");
         
         model = new LevelModel();
         GameObject.setLevelModel(model);
@@ -36,6 +39,8 @@ public class LevelRenderer implements Screen{
     }    
     private Texture hurtImg;
     private Texture _backgroundImg;
+    private Texture go;
+    private Texture win;
     private float backgroundX = 0;
     private float backgroundY = 0;
         
@@ -56,6 +61,21 @@ public class LevelRenderer implements Screen{
 
     @Override
     public void render(float f) {
+        switch (model.gameStatus()){
+            case INGAME:
+                renderModel(f);
+                break;
+            case GAMEOVER:
+                renderGameOverScreen();
+                break;
+            case WIN:
+                renderWinScreen();
+                break;
+        }
+    }
+    
+    
+    private void renderModel(float f){
         Gdx.gl.glClearColor(0, 0, 0, 1);
 	Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
@@ -78,6 +98,30 @@ public class LevelRenderer implements Screen{
         
         // нарисовать количество жизней игрока
         drawPlayerLifes(game.batch);
+        
+	game.batch.end();
+    }
+    
+    private void renderGameOverScreen(){
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+        game.batch.begin();       
+        
+        // обновить фон
+	game.batch.draw(go, model.width/4, model.height/3);
+        
+	game.batch.end();
+    }
+    
+    private void renderWinScreen(){
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+        game.batch.begin();       
+        
+        // обновить фон
+	game.batch.draw(win, model.width/4, model.height/2);
         
 	game.batch.end();
     }
