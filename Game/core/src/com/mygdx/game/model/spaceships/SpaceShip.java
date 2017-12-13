@@ -37,6 +37,6 @@ public abstract class SpaceShip extends GameObject{
     }
     
     private float _maxHealth; public float maxHealth(){return _maxHealth;} public void setMaxHealth(float health){_maxHealth = health;}
-    private float _health;    public float health(){ return _health;}  
+    private float _health;    public float health(){ return _health;}  public void setHealth(float health) {_health= health;}
     private int _lifes;       public int lifes(){ return _lifes;}     public void setLifes(int lifes){ _lifes = lifes; }
 }

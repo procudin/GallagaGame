@@ -37,6 +37,7 @@ public class LifeIncrease extends Buff{
        
         if (transform().isCollision(target.transform())){
             target.setLifes(target.lifes() + 1);
+            target.setHealth(target.maxHealth());
             dispose();
         }
     }
