@@ -11,6 +11,7 @@ import com.mygdx.game.model.StraightMovement;
 import com.mygdx.game.model.Transform;
 import com.mygdx.game.model.spaceships.SpaceShip;
 import com.mygdx.game.view.SpriteRenderer;
+import java.util.ArrayList;
 
 /**
  *
@@ -59,8 +60,10 @@ public class FireRateIncrease extends Buff{
            this.renderer().isActive = false;
            
            // применяем бафф
-           Gun gun = (Gun)target.getComponent(Gun.class);
-           gun.fireRate/=fireRateMultiplier;
+           ArrayList<Gun> guns = target.guns();
+           for (Gun gun : guns){
+               gun.fireRate/=fireRateMultiplier;
+           }
            
            // удаляем компоненту движения
            this.removeComponent(Movement.class);
@@ -71,8 +74,10 @@ public class FireRateIncrease extends Buff{
         // проверка таймаута
         if (time > duration){
            // отменяем баф
-           Gun gun = (Gun)target.getComponent(Gun.class);
-           gun.fireRate*=fireRateMultiplier;
+           ArrayList<Gun> guns = target.guns();
+           for (Gun gun : guns){
+               gun.fireRate*=fireRateMultiplier;
+           }
            
            this.dispose();
            return;

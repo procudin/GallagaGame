@@ -26,7 +26,7 @@ public class StraightShootingSpaceship extends SpaceShip{
         
         this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));        
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
-        this.setComponent(Gun.class,new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
+        this.addGun(new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
     }
     
     public StraightShootingSpaceship(Transform initialpos,int lifes,boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
@@ -39,7 +39,7 @@ public class StraightShootingSpaceship extends SpaceShip{
         
         this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));
         this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
-        this.setComponent(Gun.class,new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
+        this.addGun(new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
     }
     
     public StraightShootingSpaceship(boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {

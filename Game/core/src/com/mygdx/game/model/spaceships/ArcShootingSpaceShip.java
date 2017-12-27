@@ -24,7 +24,7 @@ public class ArcShootingSpaceShip extends SpaceShip{
         transform().r = 13;
         
         this.setRenderer(new SpriteRenderer("ArcShootingSpaceship.png",60,40));        
-        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
-        this.setComponent(Gun.class,new Gun(this,target,fromLeftToRightDirection?20:-20,0,fireRate,"ArcMovementBullet",bulletSpeed));
+        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));        
+        this.addGun(new Gun(this,target,fromLeftToRightDirection?20:-20,0,fireRate,"ArcMovementBullet",bulletSpeed));
     }
 }

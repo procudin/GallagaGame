@@ -6,6 +6,8 @@
 package com.mygdx.game.model.spaceships;
 
 import com.mygdx.game.model.GameObject;
+import com.mygdx.game.model.Gun;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,6 +37,21 @@ public abstract class SpaceShip extends GameObject{
                 this.dispose();
         }
     }
+    
+    @Override
+    public void update(float delta){
+        super.update(delta);
+        
+        for(Gun g : _guns){
+            g.update(delta);
+        }
+    }
+    
+    
+    private ArrayList<Gun> _guns = new ArrayList<Gun>();
+    public void addGun(Gun gun){ _guns.add(gun);  }
+    public ArrayList<Gun> guns(){ return _guns;}
+    public void removeGun(int index){ if (index>=0 && index<_guns.size()) _guns.remove(index); }
     
     private float _maxHealth; public float maxHealth(){return _maxHealth;} public void setMaxHealth(float health){_maxHealth = health;}
     private float _health;    public float health(){ return _health;}  public void setHealth(float health) {_health= health;}
