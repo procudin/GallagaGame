@@ -23,6 +23,10 @@ public class BuffFactory {
             return new LifeIncrease(target,t);
         }
         
+        if (buffName.equals("UnlimitedHealth")){
+            return new UnlimitedHealth(target,30,t);
+        }
+        
         return null;
     }
     
@@ -34,6 +38,10 @@ public class BuffFactory {
         
         if (buffName.equals("LifeIncrease")){
             return new LifeIncrease(target);
+        }
+        
+        if (buffName.equals("UnlimitedHealth")){
+            return new UnlimitedHealth(target,30);
         }
         
         return null;
