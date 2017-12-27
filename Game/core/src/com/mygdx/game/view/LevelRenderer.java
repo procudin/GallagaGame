@@ -63,6 +63,7 @@ public class LevelRenderer implements Screen{
     public void render(float f) {
         switch (model.gameStatus()){
             case INGAME:
+            case BOSSFIGHT:
                 renderModel(f);
                 break;
             case GAMEOVER:

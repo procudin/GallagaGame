@@ -13,6 +13,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.buffs.*;
+import com.mygdx.game.model.spaceships.BossShip;
 import com.mygdx.game.view.SpriteRenderer;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -27,10 +28,11 @@ import java.util.Random;
  */
 public class LevelModel {
     public enum GameState {
-    GAMEOVER,
-    WIN,
-    INGAME
-}
+        GAMEOVER,
+        WIN,
+        BOSSFIGHT,
+        INGAME
+    }
 
     public float gameSpeed;
     public float gameDuration;
@@ -52,8 +54,20 @@ public class LevelModel {
             return;
         }
         
-        if (currentTime > gameDuration)
-             gameStatus = GameState.WIN;   
+        if (gameStatus == GameState.INGAME && currentTime > gameDuration){
+            gameStatus = GameState.BOSSFIGHT;   
+             
+            // генерация босса
+            SpaceShip boss = new BossShip(false,1.5f,30,250,player);
+            
+            boss.transform().X = width;
+            boss.transform().Y = height/2;
+            
+            enemies.add(boss);
+        }
+        
+        if (gameStatus == GameState.BOSSFIGHT && enemies.isEmpty())
+            gameStatus = GameState.WIN;
     }
 
     /**
@@ -71,7 +85,7 @@ public class LevelModel {
 
     public LevelModel() {
         gameSpeed = 30f;
-        gameDuration = 60f *5;
+        gameDuration = 60f * 3;
         currentTime = 0f;
         
 
@@ -245,6 +259,9 @@ public class LevelModel {
     private final Random random = new Random();
 
     private void generateEnemies(float delta) {
+        if (gameStatus != GameState.INGAME)
+            return;
+        
         enemieLastSpawnTime += delta;
 
         if (enemieLastSpawnTime < enemieSpawnTimeout) {
@@ -283,7 +300,7 @@ public class LevelModel {
      * *******************************************Генерация бафов**********************************************************
      */
     
-    private float buffSpawnTimeout = 40f;
+    private float buffSpawnTimeout = 20f;
     private float buffLastSpawnTime = 20f;
     
     private void generateBuffs(float delta) {
@@ -307,13 +324,15 @@ public class LevelModel {
     }
     
     private Buff generateRandomBuff(){
-        int val = random.nextInt(2);
+        int val = random.nextInt(3);
 
         switch (val) {
             case 0:
                 return BuffFactory.getBuff("FireRateIncrease", player);
             case 1:
                 return BuffFactory.getBuff("LifeIncrease", player);
+            case 2:
+                return BuffFactory.getBuff("UnlimitedHealth", player);
         }
         
         return null;
