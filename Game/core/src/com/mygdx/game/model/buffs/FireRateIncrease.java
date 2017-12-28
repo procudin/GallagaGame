@@ -14,15 +14,21 @@ import com.mygdx.game.view.SpriteRenderer;
 import java.util.ArrayList;
 
 /**
- *
+ * Баф увеличения скорострельности
  * @author Admin
  */
 public class FireRateIncrease extends Buff{
     
-    private float fireRateMultiplier;
-    private float duration;
-    private float time = 0f;
+    private float fireRateMultiplier;               /// Множитель
+    private float duration;                         /// Длительность
+    private float time = 0f;                        /// Относительное время
     
+    /**
+     * Конструктор
+     * @param target
+     * @param fireRateMultiplier
+     * @param duration 
+     */
     public FireRateIncrease(SpaceShip target,float fireRateMultiplier,float duration) {
         super(target);
         
@@ -33,6 +39,13 @@ public class FireRateIncrease extends Buff{
         this.setComponent(Movement.class,new StraightMovement(100,false));
     }
     
+    /**
+     * Конструктор
+     * @param target
+     * @param t
+     * @param fireRateMultiplier
+     * @param duration 
+     */
     public FireRateIncrease(SpaceShip target,Transform t,float fireRateMultiplier,float duration) {
         super(target);
         
@@ -46,8 +59,12 @@ public class FireRateIncrease extends Buff{
     }
     
     
-    private boolean noCollision = true;
+    private boolean noCollision = true;         /// Был ли захвачен баф
     
+    /**
+     * Обновление
+     * @param delta 
+     */
     @Override
     public void update(float delta){  
         super.update(delta);

@@ -9,16 +9,24 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
 /**
- *
+ * Класс ручного управления движением
  * @author Admin
  */
 public class ManualMoviement extends Movement{
     
-    
+    /**
+     * Конструктор
+     * @param speed 
+     */
     public ManualMoviement(float speed) {
         super(speed);
     }
     
+    /**
+     * Проверка на выход за границы экрана
+     * @param t
+     * @return 
+     */
     public static boolean isOutOfWindow(Transform t){        
         int height = Gdx.graphics.getHeight();
         int width = Gdx.graphics.getWidth();
@@ -26,8 +34,12 @@ public class ManualMoviement extends Movement{
         return t.X > width || t.X < 0 || t.Y > height || t.Y < 0;
     }
     
-    private float tmp;
+    private float tmp;      /// Временная перменная
     
+    /**
+     * Обновление
+     * @param delta 
+     */
     @Override
     public void update(float delta){
         Transform t = _object.transform();

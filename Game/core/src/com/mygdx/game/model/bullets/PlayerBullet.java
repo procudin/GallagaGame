@@ -14,10 +14,17 @@ import com.mygdx.game.model.spaceships.SpaceShip;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
- *
+ * Пуля игрока
  * @author Admin
  */
 public class PlayerBullet extends Bullet{
+    /**
+     * Конструктор
+     * @param sender
+     * @param damage
+     * @param speed
+     * @param fromLeftToRightDirection 
+     */
     public PlayerBullet(GameObject sender,float damage,float speed,boolean fromLeftToRightDirection){
         super(damage,sender);        
         
@@ -30,6 +37,14 @@ public class PlayerBullet extends Bullet{
         this.setRenderer(new SpriteRenderer("StraightFlyingBullet.png"));
     }
     
+    /**
+     * Конструктор
+     * @param sender
+     * @param damage
+     * @param speed
+     * @param fromLeftToRightDirection
+     * @param t 
+     */
     public PlayerBullet(GameObject sender,float damage,float speed,boolean fromLeftToRightDirection,Transform t){
         super(damage,sender); 
         

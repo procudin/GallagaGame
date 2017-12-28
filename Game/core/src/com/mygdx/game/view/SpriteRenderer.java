@@ -13,11 +13,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.Transform;
 
 /**
- *
+ * Отрисовка спрайтов-картинок
  * @author Admin
  */
 public class SpriteRenderer extends Renderer{
-    
+    /**
+     * Конструктор
+     * @param assetName 
+     */
     public SpriteRenderer(String assetName) {               
         texture = new Texture(assetName);
         sprite = new Sprite(texture);           
@@ -27,6 +30,12 @@ public class SpriteRenderer extends Renderer{
         height2 = height/2;
     }
     
+    /**
+     * Конструктор
+     * @param assetName
+     * @param width
+     * @param height 
+     */
     public SpriteRenderer(String assetName, int width, int height) {       
         texture = new Texture(assetName);
         sprite = new Sprite(texture);        
@@ -36,15 +45,20 @@ public class SpriteRenderer extends Renderer{
         height2 = height/2;
     }
     
-    private Texture texture;
-    private Sprite sprite;    
-    private float width;
-    private float height;
-    private float width2;
-    private float height2;
+    private Texture texture;            /// Текстура
+    private Sprite sprite;              /// Спрайт
+    private float width;                /// Ширина
+    private float height;               /// Высота
+    private float width2;               /// Ширина/2
+    private float height2;              /// Высота/2
     
-    public float alpha = 0.1f;
+    public float alpha = 0.1f;          /// Прозрачность
     
+    /**
+     * Отрисовка
+     * @param delta
+     * @param batch 
+     */
     @Override
     public void render(float delta, SpriteBatch batch){
         if (!isActive)

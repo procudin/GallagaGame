@@ -9,14 +9,17 @@ import com.mygdx.game.model.GameObject;
 import com.mygdx.game.model.spaceships.*;
 
 /**
- *
+ * Класс бафа
  * @author Admin
  */
 public class Buff extends GameObject{
-    
+    /**
+     * КОнструктор
+     * @param target 
+     */
     protected Buff(SpaceShip target){
         this.target = target;
     }
     
-    protected SpaceShip target;
+    protected SpaceShip target;         /// Целевой корабль
 }

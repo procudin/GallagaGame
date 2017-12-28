@@ -13,11 +13,18 @@ import com.mygdx.game.view.Renderer;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
- *
+ * Корабль стреляющий по прфямой
  * @author Admin
  */
 public class StraightShootingSpaceship extends SpaceShip{
-    
+    /**
+     * Конструктор
+     * @param lifes
+     * @param fromLeftToRightDirection
+     * @param fireRate
+     * @param speed
+     * @param bulletSpeed 
+     */
     public StraightShootingSpaceship(int lifes,boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
         super(300, lifes);
         
@@ -29,6 +36,15 @@ public class StraightShootingSpaceship extends SpaceShip{
         this.addGun(new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
     }
     
+    /**
+     * Конструктор
+     * @param initialpos
+     * @param lifes
+     * @param fromLeftToRightDirection
+     * @param fireRate
+     * @param speed
+     * @param bulletSpeed 
+     */
     public StraightShootingSpaceship(Transform initialpos,int lifes,boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
         super(1000, lifes);
         
@@ -42,6 +58,13 @@ public class StraightShootingSpaceship extends SpaceShip{
         this.addGun(new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
     }
     
+    /**
+     * Конструктор
+     * @param fromLeftToRightDirection
+     * @param fireRate
+     * @param speed
+     * @param bulletSpeed 
+     */
     public StraightShootingSpaceship(boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
         this(1,fromLeftToRightDirection,fireRate,speed,bulletSpeed);
     }

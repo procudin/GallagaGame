@@ -9,10 +9,17 @@ import com.mygdx.game.model.Transform;
 import com.mygdx.game.model.spaceships.SpaceShip;
 
 /**
- *
+ * Фабрика бафов
  * @author Admin
  */
 public class BuffFactory {
+    /**
+     * Получить баф по имени
+     * @param buffName
+     * @param target
+     * @param t
+     * @return 
+     */
     public static Buff getBuff(String buffName,SpaceShip target, Transform t){
         
         if (buffName.equals("FireRateIncrease")){
@@ -30,6 +37,12 @@ public class BuffFactory {
         return null;
     }
     
+    /**
+     * Получить бафф
+     * @param buffName
+     * @param target
+     * @return 
+     */
     public static Buff getBuff(String buffName,SpaceShip target){
         
         if (buffName.equals("FireRateIncrease")){

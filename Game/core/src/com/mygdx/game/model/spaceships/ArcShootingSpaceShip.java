@@ -13,10 +13,19 @@ import com.mygdx.game.model.StraightMovement;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
- *
+ * Корабль стреляющий по дуге
  * @author Admin
  */
 public class ArcShootingSpaceShip extends SpaceShip{
+    /**
+     * Конструктор
+     * @param lifes
+     * @param speed
+     * @param fireRate
+     * @param bulletSpeed
+     * @param fromLeftToRightDirection
+     * @param target 
+     */
     public ArcShootingSpaceShip(int lifes,float speed,float fireRate,float bulletSpeed,boolean fromLeftToRightDirection, GameObject target) {
         super(150, lifes);
         

@@ -10,11 +10,14 @@ import com.mygdx.game.model.spaceships.SpaceShip;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
- *
+ * Баф увеличения количества жизней
  * @author Admin
  */
 public class LifeIncrease extends Buff{
-    
+    /**
+     * Конструктор
+     * @param target 
+     */
     public LifeIncrease(SpaceShip target) {
         super(target);
         
@@ -22,6 +25,11 @@ public class LifeIncrease extends Buff{
         this.setComponent(Movement.class,new StraightMovement(100,false));
     }
     
+    /**
+     * Конструктор
+     * @param target
+     * @param t 
+     */
     public LifeIncrease(SpaceShip target,Transform t) {
         super(target);
         
@@ -31,6 +39,10 @@ public class LifeIncrease extends Buff{
         this.setComponent(Movement.class,new StraightMovement(100,false));
     }
     
+    /**
+     * Обновление
+     * @param delta 
+     */
     @Override
     public void update(float delta){
         super.update(delta);

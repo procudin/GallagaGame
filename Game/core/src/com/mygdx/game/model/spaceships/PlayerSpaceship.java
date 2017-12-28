@@ -13,11 +13,18 @@ import com.mygdx.game.model.spaceships.SpaceShip;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
- *
+ * Корабль игрока
  * @author Admin
  */
 public class PlayerSpaceship extends SpaceShip{
-    
+    /**
+     * КОнструктор
+     * @param lifes
+     * @param fromLeftToRightDirection
+     * @param fireRate
+     * @param speed
+     * @param bulletSpeed 
+     */
     public PlayerSpaceship(int lifes,boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
         
         super(1000, lifes);
@@ -30,6 +37,15 @@ public class PlayerSpaceship extends SpaceShip{
         this.addGun(new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"PlayerBullet",bulletSpeed,fromLeftToRightDirection));
     }
     
+    /**
+     * Конструктор
+     * @param initialpos
+     * @param lifes
+     * @param fromLeftToRightDirection
+     * @param fireRate
+     * @param speed
+     * @param bulletSpeed 
+     */
     public PlayerSpaceship(Transform initialpos,int lifes,boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed) {
         super(1000, lifes);
         

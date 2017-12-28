@@ -13,10 +13,18 @@ import com.mygdx.game.model.StraightMovement;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
- *
+ * Космический кораль босса
  * @author Admin
  */
 public class BossShip extends SpaceShip{    
+    /**
+     * Конструктор
+     * @param fromLeftToRightDirection
+     * @param fireRate
+     * @param speed
+     * @param bulletSpeed
+     * @param target 
+     */
     public BossShip(boolean fromLeftToRightDirection,float fireRate,float speed,float bulletSpeed, GameObject target){
         super(10000,1);
         

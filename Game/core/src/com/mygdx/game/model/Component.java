@@ -8,18 +8,26 @@ package com.mygdx.game.model;
 import com.mygdx.game.model.GameObject;
 
 /**
- *
+ * Класс компонента
  * @author Admin
  */
 public abstract class Component {
-    
-    //protected GameObject _parent; public GameObject parent(){return _parent;}
+    /**
+     * Объект, которому принадлежит компонент
+     */
     protected GameObject _object; public GameObject object(){ return _object;}
     
+    /**
+     * Обновление компонента
+     * @param delta 
+     */
     public void update(float delta){
         
     }
     
+    /**
+     * Удаление компонента
+     */
     public  void dispose(){ 
         _object.removeComponent(this);
     }    

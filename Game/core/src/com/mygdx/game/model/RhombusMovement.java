@@ -6,11 +6,19 @@
 package com.mygdx.game.model;
 
 /**
- *
+ * Движение по ромбу
  * @author Admin
  */
 public class RhombusMovement extends Movement{
     
+    /**
+     * КОнструктор
+     * @param speed
+     * @param height
+     * @param width
+     * @param initialX
+     * @param initialY 
+     */
     public RhombusMovement(float speed,float height, float width, float initialX, float initialY){
         super(speed);
         
@@ -26,19 +34,23 @@ public class RhombusMovement extends Movement{
         this._cos = width / edge;
     }
     
-    public float height;
-    public float width;
-    public float initialX;
-    public float initialY;
+    public float height;            /// Длина вертикальной диагонали
+    public float width;             /// Длина горизонтальной диагонали
+    public float initialX;          /// Начальная позиция X
+    public float initialY;          /// Начальная позиция Y
     
-    private float height_2;
-    private float width_2;
-    private float edge;
-    private float _sin;
-    private float _cos;
+    private float height_2;         /// height/2
+    private float width_2;          /// width/2
+    private float edge;             /// Длина ребра
+    private float _sin;             /// height / edge
+    private float _cos;             /// width / edge
     
-    private int mode = 0;
+    private int mode = 0;           /// Номер диагонали, по которой осуществляется движение
     
+    /**
+     * Обновление
+     * @param delta 
+     */
     @Override
     public void update(float delta){
         

@@ -9,17 +9,25 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- *
+ * Класс формы объекта
  * @author Admin
  */
 public class Transform extends Component{    
-    public float angle = 0f;    
-    public float X;
-    public float Y;
-    public float width;
-    public float height;
-    public float r ;
+    public float angle = 0f;        /// Угол поворота
+    public float X;                 /// Позиция X
+    public float Y;                 /// Позиция Y
+    public float width;             /// Ширина
+    public float height;            /// Высота
+    public float r ;                /// Радиус
         
+    /**
+     * КОнструктор
+     * @param X
+     * @param Y
+     * @param width
+     * @param height
+     * @param angle 
+     */
     public Transform(float X, float Y,float width, float height, float angle){
         this.X = X;
         this.Y = Y;
@@ -29,6 +37,13 @@ public class Transform extends Component{
         this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
+    /**
+     * Конструктор
+     * @param X
+     * @param Y
+     * @param width
+     * @param height 
+     */
     public Transform(float X, float Y,float width, float height){
         this.X = X;
         this.Y = Y;
@@ -38,6 +53,11 @@ public class Transform extends Component{
         this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
+    /**
+     * Конструктор
+     * @param X
+     * @param Y 
+     */
     public Transform(float X, float Y){
         this.X = X;
         this.Y = Y;
@@ -47,6 +67,12 @@ public class Transform extends Component{
         this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
+    /**
+     * КОнструктор
+     * @param X
+     * @param Y
+     * @param angle 
+     */
     public Transform(float X, float Y,float angle){
         this.X = X;
         this.Y = Y;
@@ -56,6 +82,9 @@ public class Transform extends Component{
         this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
+    /**
+     * КОнструктор
+     */
     public Transform(){
         this.X = 0;
         this.Y = 0;
@@ -65,6 +94,11 @@ public class Transform extends Component{
         this.r = (float)Math.sqrt(width * width + height*height)/2;
     }
     
+    /**
+     * Проверка на коллизии
+     * @param other
+     * @return 
+     */
     public boolean isCollision(Transform other){        
         return (float)Math.sqrt(Math.pow(X - other.X, 2) + Math.pow(Y - other.Y, 2)) < r + other.r;
     }

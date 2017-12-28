@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * Главный класс игры
+ * @author Admin
+ */
 public class Gallaga extends Game {
         SpriteBatch batch;
         

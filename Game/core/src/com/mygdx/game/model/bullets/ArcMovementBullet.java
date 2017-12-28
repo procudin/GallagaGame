@@ -13,10 +13,18 @@ import com.mygdx.game.model.Transform;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
- *
+ * Пуля, двигающися по дуге
  * @author Admin
  */
 public class ArcMovementBullet extends Bullet{
+    /**
+     * Конструктор
+     * @param sender
+     * @param target
+     * @param damage
+     * @param speed
+     * @param fromLeftToRightDirection 
+     */
     public ArcMovementBullet(GameObject sender,GameObject target,float damage,float speed,boolean fromLeftToRightDirection) {
         super(damage, sender);
         
@@ -33,6 +41,15 @@ public class ArcMovementBullet extends Bullet{
         this.setRenderer(new SpriteRenderer("ArcMovementBullet.png"));
     }
     
+    /**
+     * Конструктор
+     * @param sender
+     * @param target
+     * @param damage
+     * @param speed
+     * @param fromLeftToRightDirection
+     * @param t 
+     */
     public ArcMovementBullet(GameObject sender,GameObject target,float damage,float speed,boolean fromLeftToRightDirection,Transform t) {
         super(damage, sender);
         

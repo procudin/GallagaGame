@@ -14,14 +14,19 @@ import com.mygdx.game.view.SpriteRenderer;
 import java.util.ArrayList;
 
 /**
- *
+ * Баф бессмертия
  * @author Admin
  */
 public class UnlimitedHealth extends Buff{
     
-    private float duration;
-    private float time = 0f;
+    private float duration;     /// Длительность
+    private float time = 0f;    /// Локальное время   
     
+    /**
+     * КОнструктор
+     * @param target
+     * @param duration 
+     */
     public UnlimitedHealth(SpaceShip target, float duration) {
         super(target);
         
@@ -32,6 +37,12 @@ public class UnlimitedHealth extends Buff{
         this.setComponent(Movement.class,new StraightMovement(100,false));
     }
     
+    /**
+     * Конструктор
+     * @param target
+     * @param duration
+     * @param t 
+     */
     public UnlimitedHealth(SpaceShip target, float duration,Transform t) {
         super(target);
         
@@ -44,15 +55,20 @@ public class UnlimitedHealth extends Buff{
         this.setComponent(Movement.class,new StraightMovement(100,false));
     }
     
-    private boolean noCollision = true;
+    private boolean noCollision = true;         /// Был ли захвачен целью
     
-    private float oldHealth=0;
+    private float oldHealth=0;                  /// Старое значение здоровья
     
+    /**
+     * Обновление
+     * @param delta 
+     */
     @Override
     public void update(float delta){
         super.update(delta);  
         
         if (target.health()>9999999) {
+            // если баф был использован
             this.dispose();
             return;
         }

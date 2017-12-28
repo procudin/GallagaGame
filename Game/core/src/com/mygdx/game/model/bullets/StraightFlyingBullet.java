@@ -13,11 +13,17 @@ import com.mygdx.game.model.spaceships.SpaceShip;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
- *
+ * Прямо летящая пуля
  * @author Admin
  */
 public class StraightFlyingBullet extends Bullet {
-    
+    /**
+     * Конструктор
+     * @param sender
+     * @param damage
+     * @param initialpos
+     * @param fromLeftToRightDirection 
+     */
     public StraightFlyingBullet(GameObject sender,float damage,Transform initialpos,boolean fromLeftToRightDirection){
         super(damage,sender);
         
@@ -32,6 +38,14 @@ public class StraightFlyingBullet extends Bullet {
         this.setRenderer(new SpriteRenderer("StraightFlyingEnemieBullet.png"));
     }
     
+    /**
+     * КОнструктор
+     * @param sender
+     * @param damage
+     * @param speed
+     * @param initialpos
+     * @param fromLeftToRightDirection 
+     */
     public StraightFlyingBullet(GameObject sender,float damage,float speed,Transform initialpos,boolean fromLeftToRightDirection){
         super(damage,sender);
         
@@ -47,6 +61,13 @@ public class StraightFlyingBullet extends Bullet {
         
     }
     
+    /**
+     * Конструктор
+     * @param sender
+     * @param damage
+     * @param speed
+     * @param fromLeftToRightDirection 
+     */
     public StraightFlyingBullet(GameObject sender,float damage,float speed,boolean fromLeftToRightDirection){
         super(damage,sender);        
         

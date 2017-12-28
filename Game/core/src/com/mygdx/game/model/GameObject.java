@@ -9,7 +9,7 @@ import com.mygdx.game.view.Renderer;
 import java.util.HashMap;
 
 /**
- *
+ * Класс объекта игрового поля
  * @author Admin
  */
 public abstract class GameObject extends Component{  
@@ -34,6 +34,10 @@ public abstract class GameObject extends Component{
         setTransform(new Transform());        
     }
     
+    /**
+     * Обновление объекта
+     * @param delta 
+     */
     @Override
     public void update(float delta){
         for (Component value : _components.values()){
@@ -42,7 +46,9 @@ public abstract class GameObject extends Component{
     }    
     
     
-    
+    /**
+     * Удаление объекта
+     */
     private boolean disposed = false;
     public boolean disposed(){ return disposed;}
     @Override    
@@ -51,7 +57,12 @@ public abstract class GameObject extends Component{
         _components.clear();
     }
     
-    /*******************Работа с компонентами*********************************************/    
+    /*******************Работа с компонентами*********************************************/ 
+    /**
+     * Получение компонента
+     * @param componentclass
+     * @return 
+     */
     public Component getComponent(Class componentclass){        
         for (Class key : _components.keySet()){
             if (componentclass.isAssignableFrom(key)){
@@ -60,22 +71,41 @@ public abstract class GameObject extends Component{
         }
         
         return null;
-    }
+    }    
     
+    /**
+     * Задание компонента
+     * @param component
+     * @return 
+     */
     public Component setComponent(Component component){  
         return setComponent(component.getClass(),component);
     }     
     
+    /**
+     * Задание компонента
+     * @param componentClass
+     * @param component
+     * @return 
+     */
     public Component setComponent(Class componentClass,Component component){  
         component._object = this;  
         _components.put(componentClass, component);  
         return _components.get(componentClass);
     }    
     
+    /**
+     * Удаление компонента
+     * @param component 
+     */
     public void removeComponent(Component component){
         removeComponent(component.getClass());
     }
     
+    /**
+     * Удаление компонента
+     * @param componentClass 
+     */
     public void removeComponent(Class componentClass){
         for (Class key : _components.keySet()){
             if (componentClass.isAssignableFrom(key)){
@@ -85,6 +115,7 @@ public abstract class GameObject extends Component{
         }
     }  
     
+    /// Контейнер с компонентами
     private HashMap<Class,Component> _components = new HashMap<Class,Component>();
 }
     

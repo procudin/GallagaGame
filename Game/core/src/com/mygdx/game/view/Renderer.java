@@ -11,10 +11,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.*;
 
 /**
- *
+ * Абстракция отрисовки
  * @author Admin
  */
 public abstract class Renderer extends Component{        
-    public boolean isActive = true;
-    public abstract void render(float delta, SpriteBatch batch);
+    public boolean isActive = true;         /// Активность
+    
+    /**
+     * Отрисовка
+     * @param delta
+     * @param batch 
+     */
+    public abstract void render(float delta, SpriteBatch batch);    
 }

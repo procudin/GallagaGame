@@ -6,23 +6,35 @@
 package com.mygdx.game.model;
 
 /**
- *
+ * Класс прямолинейного движения
  * @author Admin
  */
 public class StraightMovement extends Movement{    
-    
+    /**
+     * Конструктор
+     * @param speed
+     * @param fromLeftToRight 
+     */
     public StraightMovement(float speed,boolean fromLeftToRight){
         super(speed);
         this.fromLeftToRight=fromLeftToRight;
     }
     
+    /**
+     * Конструктор
+     * @param fromLeftToRight 
+     */
     public StraightMovement(boolean fromLeftToRight){
         super();
         this.fromLeftToRight=fromLeftToRight;
     }
     
-    private final boolean fromLeftToRight;
+    private final boolean fromLeftToRight;      /// Направление движения
     
+    /**
+     * Обновление
+     * @param delta 
+     */
     @Override
     public void update(float delta){        
         if (fromLeftToRight)

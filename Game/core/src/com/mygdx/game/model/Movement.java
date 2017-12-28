@@ -6,18 +6,24 @@
 package com.mygdx.game.model;
 
 /**
- *
+ * Класс движения
  * @author Admin
  */
 public abstract class Movement extends Component{    
-    
+    /**
+     * Конструктор
+     */
     public Movement(){
         this(2f);
     }
     
+    /**
+     * Конструктор
+     * @param speed 
+     */
     public Movement(float speed){
         this.speed = speed;
     }
     
-    public float speed;    
+    public float speed;    /// Скорость
 }

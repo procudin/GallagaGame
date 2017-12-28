@@ -10,11 +10,16 @@ import com.mygdx.game.model.StraightMovement;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
- *
+ * Большой космический корабль
  * @author Admin
  */
 public class BigSpaceShip extends SpaceShip{
-    
+    /**
+     * Конструктор
+     * @param lifes
+     * @param fromLeftToRightDirection
+     * @param speed 
+     */
     public BigSpaceShip(int lifes,boolean fromLeftToRightDirection,float speed) {
         super(500,lifes);
         

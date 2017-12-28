@@ -6,22 +6,30 @@
 package com.mygdx.game.model;
 
 /**
- *
+ * Класс движения по дуге
  * @author Admin
  */
 public class ArcMovement extends Movement{
+    /**
+     * Конструктор
+     * @param speed 
+     */
     public ArcMovement(float speed){
         super(speed);        
     }    
     
-    private int targetX;    
-    private int targetY;
-    private float dx;
-    private float dy;
-    private float dx_diag;
-    private float dy_diag;
+    private int targetX;    /// целевая позиция X
+    private int targetY;    /// целевая позиция Y
+    private float dx;       /// Прирост X
+    private float dy;       /// Прирост Y
+    private float dx_diag;  /// Прирост Х к диагонали
+    private float dy_diag;  /// Прирост Y к диагонали
     
-    
+    /**
+     * Задать цель
+     * @param x
+     * @param y 
+     */
     public void setTarget(int x, int y){
         this.targetX = x;
         this.targetY = y;
@@ -37,6 +45,10 @@ public class ArcMovement extends Movement{
             _object.dispose();
     }
     
+    /**
+     * Обновление
+     * @param delta 
+     */
     @Override
     public void update(float delta){        
         _object.transform().X += speed * delta * dx_diag;

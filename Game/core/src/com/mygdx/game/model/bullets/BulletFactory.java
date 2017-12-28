@@ -12,11 +12,20 @@ import com.mygdx.game.model.bullets.StraightFlyingBullet;
 import com.mygdx.game.model.spaceships.SpaceShip;
 
 /**
- *
+ * Фабрика пуль
  * @author Admin
  */
 public class BulletFactory {  
-    
+    /**
+     * Получить пулю
+     * @param initialPos
+     * @param sender
+     * @param target
+     * @param bulletType
+     * @param bulletSpeed
+     * @param isFromLeftToRight
+     * @return 
+     */
     public static Bullet getBullet(Transform initialPos,GameObject sender,GameObject target,String bulletType,float bulletSpeed,boolean isFromLeftToRight){
         if (bulletType.equals("StraightFlyingBullet")){
             return new StraightFlyingBullet(sender,120,bulletSpeed,initialPos,isFromLeftToRight);
