@@ -97,7 +97,7 @@ public class LevelModel {
      */
     public LevelModel() {
         gameSpeed = 30f;
-        gameDuration = 60f * 3;
+        gameDuration = 60f ;
         currentTime = 0f;
         
 
@@ -396,11 +396,12 @@ public class LevelModel {
 
         switch (val) {
             case 0:
-                return BuffFactory.getBuff("FireRateIncrease", player);
+                
             case 1:
-                return BuffFactory.getBuff("LifeIncrease", player);
+                //return BuffFactory.getBuff("LifeIncrease", player);
             case 2:
-                return BuffFactory.getBuff("UnlimitedHealth", player);
+                return BuffFactory.getBuff("FireRateIncrease", player);
+                //eturn BuffFactory.getBuff("UnlimitedHealth", player);
         }
         
         return null;
