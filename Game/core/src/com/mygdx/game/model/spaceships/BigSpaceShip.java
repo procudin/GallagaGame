@@ -7,6 +7,7 @@ package com.mygdx.game.model.spaceships;
 
 import com.mygdx.game.model.Movement;
 import com.mygdx.game.model.StraightMovement;
+import com.mygdx.game.model.Teleportation;
 import com.mygdx.game.view.SpriteRenderer;
 
 /**
@@ -28,5 +29,6 @@ public class BigSpaceShip extends SpaceShip{
         
         this.setRenderer(new SpriteRenderer("BigSpaceship.png"));
         this.setComponent("Movement",new StraightMovement(speed,fromLeftToRightDirection));
+        this.setComponent("Teleportation" , new Teleportation());
     }
 }
