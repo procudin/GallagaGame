@@ -22,7 +22,7 @@ public class LifeIncrease extends Buff{
         super(target);
         
         this.setRenderer(new SpriteRenderer("LifeIncrease.png"));
-        this.setComponent(Movement.class,new StraightMovement(100,false));
+        this.setComponent("Movement",new StraightMovement(100,false));
     }
     
     /**
@@ -36,7 +36,7 @@ public class LifeIncrease extends Buff{
         setTransform(t);
         
         this.setRenderer(new SpriteRenderer("LifeIncrease.png"));
-        this.setComponent(Movement.class,new StraightMovement(100,false));
+        this.setComponent("Movement",new StraightMovement(100,false));
     }
     
     /**

@@ -33,7 +33,7 @@ public class PlayerBullet extends Bullet{
         this.transform().height = 11;
         this.transform().r = 5;
         
-        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
+        this.setComponent("Movement",new StraightMovement(speed,fromLeftToRightDirection));
         this.setRenderer(new SpriteRenderer("StraightFlyingBullet.png"));
     }
     
@@ -55,7 +55,7 @@ public class PlayerBullet extends Bullet{
         this.transform().height = 11;
         this.transform().r = 5;
         
-        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
+        this.setComponent("Movement",new StraightMovement(speed,fromLeftToRightDirection));
         this.setRenderer(new SpriteRenderer("StraightFlyingBullet.png"));
     }
 }

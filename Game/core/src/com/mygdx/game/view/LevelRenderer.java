@@ -13,6 +13,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.*;
 import com.mygdx.game.model.LevelModel;
+import com.mygdx.game.model.modules.ModuleLoader;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import java.io.File;
 
 /**
  * Отрисовщик игры
@@ -21,7 +25,7 @@ import com.mygdx.game.model.LevelModel;
 public class LevelRenderer implements Screen{
     
     private final Gallaga game;             /// Игра
-    private final LevelModel model;         /// Модель игры
+    private final ILevelModel model;         /// Модель игры
     
     /**
      * Конструктор
@@ -37,7 +41,7 @@ public class LevelRenderer implements Screen{
         model = new LevelModel();
         GameObject.setLevelModel(model);
         
-        
+        loadModules();
         
         this.game = game; 
     }    
@@ -56,6 +60,29 @@ public class LevelRenderer implements Screen{
         return backgroundX + _backgroundImg.getWidth() < Gdx.graphics.getWidth();
     }
     
+    private void loadModules(){
+        ModuleLoader loader = new ModuleLoader(ClassLoader.getSystemClassLoader());
+        JFileChooser fileopen = new JFileChooser("F:\\Gallaga\\Game\\core\\build\\classes\\main");
+        fileopen.setMultiSelectionEnabled(true);
+        int ret = fileopen.showDialog(null, "Загрузить модуль");
+        
+        if (ret == JFileChooser.APPROVE_OPTION) {            
+            File [] modules = fileopen.getSelectedFiles();
+            
+            for (File module : modules){
+                String name = module.getAbsolutePath();                
+                try{
+                    Class clazz = loader.loadClass(name);
+                    Component execute = (Component)clazz.newInstance();  
+                    //execute.load();
+                    model.addModule(execute);
+                }catch (Exception ex){
+                    System.out.println("Cann't load module " + name);
+                }
+            }
+        }
+    }
+    
     
     int hurtOfsetX = (int)(Gdx.graphics.getWidth() * 0.02); /// Смещение позиции сердца X
     int hurtOfsetY = (int)(Gdx.graphics.getHeight() * 0.95);/// Смещение позиции сердца Y
@@ -65,7 +92,7 @@ public class LevelRenderer implements Screen{
      * @param batch 
      */
     private void drawPlayerLifes(SpriteBatch batch){
-        for (int i = 0; i< model.player().lifes();i++){
+        for (int i = 0; i< model.playerShip().lifes();i++){
             batch.draw(hurtImg, hurtOfsetX + (int)(hurtOfsetX*i*1.5),hurtOfsetY);
         }
     }
@@ -76,7 +103,7 @@ public class LevelRenderer implements Screen{
      */
     @Override
     public void render(float f) {
-        switch (model.gameStatus()){
+        switch (model.gameState()){
             case INGAME:
             case BOSSFIGHT:
                 renderModel(f);
@@ -105,7 +132,7 @@ public class LevelRenderer implements Screen{
         model.update(f);
         
         // обновление позиции фона
-        backgroundX -= model.gameSpeed * f;        
+        backgroundX -= model.gameSpeed() * f;        
         
         game.batch.begin();        
         
@@ -131,7 +158,7 @@ public class LevelRenderer implements Screen{
         game.batch.begin();       
         
         // обновить фон
-	game.batch.draw(go, model.width/4, model.height/3);
+	game.batch.draw(go, model.width()/4, model.height()/3);
         
 	game.batch.end();
     }
@@ -146,7 +173,7 @@ public class LevelRenderer implements Screen{
         game.batch.begin();       
         
         // обновить фон
-	game.batch.draw(win, model.width/4, model.height/2);
+	game.batch.draw(win, model.width()/4, model.height()/2);
         
 	game.batch.end();
     }

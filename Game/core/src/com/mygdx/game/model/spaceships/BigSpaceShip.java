@@ -27,6 +27,6 @@ public class BigSpaceShip extends SpaceShip{
         transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("BigSpaceship.png"));
-        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
+        this.setComponent("Movement",new StraightMovement(speed,fromLeftToRightDirection));
     }
 }

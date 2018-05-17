@@ -32,7 +32,7 @@ public class BossShip extends SpaceShip{
         transform().r = 70;
         
         this.setRenderer(new SpriteRenderer("boss.png",120,200));
-        this.setComponent(Movement.class,new RhombusMovement(speed,200,100,550,200));        
+        this.setComponent("Movement",new RhombusMovement(speed,200,100,550,200));        
         
         this.addGun(new Gun(this,target,0,25,fireRate/3,"ArcMovementBullet",bulletSpeed));
         this.addGun(new Gun(this,target,0,-25,fireRate/3,"ArcMovementBullet",bulletSpeed));

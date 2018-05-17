@@ -34,7 +34,7 @@ public class UnlimitedHealth extends Buff{
         this.transform().r = 5;
         
         this.setRenderer(new SpriteRenderer("UnlimitedHealth.png",19,30));
-        this.setComponent(Movement.class,new StraightMovement(100,false));
+        this.setComponent("Movement",new StraightMovement(100,false));
     }
     
     /**
@@ -52,7 +52,7 @@ public class UnlimitedHealth extends Buff{
         this.transform().r = 5;
         
         this.setRenderer(new SpriteRenderer("UnlimitedHealth.png",19,30));
-        this.setComponent(Movement.class,new StraightMovement(100,false));
+        this.setComponent("Movement",new StraightMovement(100,false));
     }
     
     private boolean noCollision = true;         /// Был ли захвачен целью
@@ -78,7 +78,7 @@ public class UnlimitedHealth extends Buff{
            
            this.renderer().isActive = false;
            // удаляем компоненту движения
-           this.removeComponent(Movement.class);
+           this.removeComponent("Movement");
            
            oldHealth = target.health();
            

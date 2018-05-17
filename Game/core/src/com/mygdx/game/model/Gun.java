@@ -25,6 +25,8 @@ public class Gun extends Component{
      * @param isFromLeftToRightDirection 
      */
     public Gun(GameObject parent,float ofsetX, float ofsetY,float fireRate,String bulletType,float bulletSpeed,boolean isFromLeftToRightDirection){
+        super();
+        
         this.parent = parent;
         this.isFromLeftToRightDirection = isFromLeftToRightDirection;
         this.ofsetX = ofsetX;
@@ -47,6 +49,8 @@ public class Gun extends Component{
      * @param bulletSpeed 
      */
     public Gun(GameObject parent,GameObject target,float ofsetX, float ofsetY,float fireRate,String bulletType,float bulletSpeed){
+        super();
+        
         this.parent = parent;
         this.isFromLeftToRightDirection = isFromLeftToRightDirection;
         this.ofsetX = ofsetX;

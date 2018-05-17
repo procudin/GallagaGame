@@ -22,6 +22,7 @@ public abstract class Movement extends Component{
      * @param speed 
      */
     public Movement(float speed){
+        super();
         this.speed = speed;
     }
     

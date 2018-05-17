@@ -32,7 +32,7 @@ public class StraightShootingSpaceship extends SpaceShip{
         transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));        
-        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
+        this.setComponent("Movement",new StraightMovement(speed,fromLeftToRightDirection));
         this.addGun(new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
     }
     
@@ -54,7 +54,7 @@ public class StraightShootingSpaceship extends SpaceShip{
         transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("StraightShootingSpaceship.png"));
-        this.setComponent(Movement.class,new StraightMovement(speed,fromLeftToRightDirection));
+        this.setComponent("Movement",new StraightMovement(speed,fromLeftToRightDirection));
         this.addGun(new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"StraightFlyingBullet",bulletSpeed,fromLeftToRightDirection));
     }
     

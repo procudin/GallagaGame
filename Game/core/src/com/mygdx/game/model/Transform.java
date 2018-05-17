@@ -29,6 +29,8 @@ public class Transform extends Component{
      * @param angle 
      */
     public Transform(float X, float Y,float width, float height, float angle){
+        super();
+        
         this.X = X;
         this.Y = Y;
         this.width = width;
@@ -45,6 +47,8 @@ public class Transform extends Component{
      * @param height 
      */
     public Transform(float X, float Y,float width, float height){
+        super();
+        
         this.X = X;
         this.Y = Y;
         this.width = width;
@@ -59,6 +63,8 @@ public class Transform extends Component{
      * @param Y 
      */
     public Transform(float X, float Y){
+        super();
+        
         this.X = X;
         this.Y = Y;
         this.width = 10;
@@ -74,6 +80,8 @@ public class Transform extends Component{
      * @param angle 
      */
     public Transform(float X, float Y,float angle){
+        super();
+        
         this.X = X;
         this.Y = Y;
         this.width = 10;
@@ -86,6 +94,8 @@ public class Transform extends Component{
      * КОнструктор
      */
     public Transform(){
+        super();
+        
         this.X = 0;
         this.Y = 0;
         this.width = 10;

@@ -33,7 +33,7 @@ public class PlayerSpaceship extends SpaceShip{
         transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("PlayersSpaceship.png"));        
-        this.setComponent(Movement.class,new ManualMoviement(speed));
+        this.setComponent("Movement",new ManualMoviement(speed));
         this.addGun(new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"PlayerBullet",bulletSpeed,fromLeftToRightDirection));
     }
     
@@ -55,7 +55,7 @@ public class PlayerSpaceship extends SpaceShip{
         transform().r = 18;
         
         this.setRenderer(new SpriteRenderer("PlayersSpaceship.png"));        
-        this.setComponent(Movement.class,new ManualMoviement(speed));
+        this.setComponent("Movement",new ManualMoviement(speed));
         this.addGun(new Gun(this,fromLeftToRightDirection?20:-20,0,fireRate,"PlayerBullet",bulletSpeed,fromLeftToRightDirection));
     }
 }

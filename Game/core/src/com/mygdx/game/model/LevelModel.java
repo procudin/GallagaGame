@@ -17,119 +17,166 @@ import com.mygdx.game.model.spaceships.BossShip;
 import com.mygdx.game.view.SpriteRenderer;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
-
-
 /**
  * Класс модели игры
+ *
  * @author Admin
  */
-public class LevelModel {
-    /**
-     * Состояния игры
-     */
-    public enum GameState {
-        GAMEOVER,       /// Игра проиграна
-        WIN,            /// Игра выиграна
-        BOSSFIGHT,      /// Бой с боссом
-        INGAME          /// Бой
+public class LevelModel implements ILevelModel {
+    /// Скорость игры
+    protected float gameSpeed;         
+    public float gameSpeed() {
+        return gameSpeed;
     }
-
-    public float gameSpeed;         /// Скорость игры
-    public float gameDuration;      /// Длительность игры
-    public float currentTime;       /// Текущее игровое время
+    public void setGameSpeed(float speed) {
+        if (speed < 0) {
+            speed = 30f;
+        }
+        gameSpeed = speed;
+    }
     
+    /// Длительность игры
+    public float gameDuration;      
+    public float gameDuration() {
+        return gameDuration;
+    }    
+    public void setGameDuration(float duration){
+        gameDuration = duration;
+    }
+    
+    /// Текущее игровое время
+    public float currentTime;       
+    public float currentTime() {
+        return currentTime;
+    }
     
 
     public final int height;        /// Высота игрового поля
+    public float height() {return height;}
     public final int width;         /// Ширина игрового поля
-
+    public float width() {return width;}
+    
+    
     /**
      * Статус игры
      */
-    private GameState gameStatus = GameState.INGAME;    
-    public GameState gameStatus() {
+    private GameState gameStatus = GameState.INGAME;
+
+    @Override
+    public GameState gameState() {
         return gameStatus;
-    }
-    
-    /**
-     * Проверка текущего статуса
-     */
-    private void checkGameState(){
-        if (player.disposed()){
-            gameStatus = GameState.GAMEOVER;
-            return;
-        }
-        
-        if (gameStatus == GameState.INGAME && currentTime > gameDuration){
-            gameStatus = GameState.BOSSFIGHT;   
-             
-            // генерация босса
-            SpaceShip boss = new BossShip(false,1.5f,30,250,player);
-            
-            boss.transform().X = width;
-            boss.transform().Y = height/2;
-            
-            enemies.add(boss);
-        }
-        
-        if (gameStatus == GameState.BOSSFIGHT && enemies.isEmpty())
-            gameStatus = GameState.WIN;
     }
 
     /**
-     * ********************** Объекты игрового поля ***********************************
+     * Проверка текущего статуса
+     */
+    private void checkGameState() {
+        if (player.disposed()) {
+            gameStatus = GameState.GAMEOVER;
+            return;
+        }
+
+        if (gameStatus == GameState.INGAME && currentTime > gameDuration) {
+            gameStatus = GameState.BOSSFIGHT;
+
+            boss.renderer().isActive = true;
+
+            boss.transform().X = width;
+            boss.transform().Y = height / 2;
+
+            enemies.add(boss);
+        }
+
+        if (gameStatus == GameState.BOSSFIGHT && enemies.isEmpty()) {
+            gameStatus = GameState.WIN;
+        }
+    }
+
+    /**
+     * ********************** Объекты игрового поля
+     * ***********************************
      */
     private LinkedList<SpaceShip> enemies = new LinkedList<SpaceShip>();        /// Контейнер с врагами
     private LinkedList<Bullet> playerBullets = new LinkedList<Bullet>();        /// Контейнер пуль игрока
     private LinkedList<Bullet> enemieBullets = new LinkedList<Bullet>();        /// Контейнер вражеских пуль
     private LinkedList<Buff> buffs = new LinkedList<Buff>();                    /// Контейнер баффов
+    private LinkedList<Component> modules = new LinkedList<Component>();        /// Контейнер модулей
     private SpaceShip player;                                                   /// Корабль игрока
+    private SpaceShip boss;
 
-    public SpaceShip player() {
+    public SpaceShip playerShip() {
         return player;
     }
-
+    public void setPlayerShip(SpaceShip ship) {
+        player = ship;
+    }
+    
+    public List<SpaceShip> enemies() {
+        return enemies;
+    }
+    public void addEnemie(SpaceShip ship) {
+        enemies.add(ship);
+    }
+    
+    public void addBullet(Bullet bull){
+        if (bull.sender() == player) {
+            playerBullets.add(bull);
+        } else {
+            enemieBullets.add(bull);
+        }
+    }
+    public List<Bullet> playerBullets(){
+        return playerBullets;
+    }
+    public List<Bullet> enemieBullets(){
+        return enemieBullets;
+    }
+    
+    public List<Component> modules(){
+        return modules;
+    }    
+    public void addModule(Component module){
+        modules.add(module);
+        //module.load();
+    }
+    
+    
+    
+    
     /**
      * Конструктор
      */
     public LevelModel() {
         gameSpeed = 30f;
-        gameDuration = 60f ;
+        gameDuration = 60f;
         currentTime = 0f;
-        
 
         height = Gdx.graphics.getHeight();
         width = Gdx.graphics.getWidth();
 
-        init();
-    }
-
-    /**
-     * Иницализация
-     */
-    private void init() {
-        // добаляем корабль игрока
+        // генерация игрока
         player = new PlayerSpaceship(new Transform(Gdx.graphics.getWidth() / 12, Gdx.graphics.getHeight() / 2), 3, true, 0.2f, 190f, 400f);
+
+        // генерация босса
+        boss = new BossShip(false, 1.5f, 30, 250, player);
+        boss.renderer().isActive = false;
     }
 
-    /**
-     * Добавление пули
-     * @param bullet 
-     */
-    public void addBullet(Bullet bullet) {
-        if (bullet.sender() == player) {
-            playerBullets.add(bullet);
-        } else {
-            enemieBullets.add(bullet);
+
+    public void updateModules(float delta) {
+        for (Component module : modules) {
+            module.update(delta);
         }
     }
 
     /**
      * Проверка позиции пуль игрока и вражеских кораблей
-     * @param bul 
+     *
+     * @param bul
      */
     private void checkPlayerBulletCollisions(Bullet bul) {
         ListIterator<SpaceShip> iter = enemies.listIterator();
@@ -146,7 +193,8 @@ public class LevelModel {
 
     /**
      * Проверка позиции игрока и вражеских пуль
-     * @param bul 
+     *
+     * @param bul
      */
     private void checkEnemieBulletCollisions(Bullet bul) {
         if (player.transform().isCollision(bul.transform())) {
@@ -157,7 +205,8 @@ public class LevelModel {
 
     /**
      * Обновление пуль игрока
-     * @param delta 
+     *
+     * @param delta
      */
     private void updatePlayerBullets(float delta) {
         ListIterator<Bullet> iter = playerBullets.listIterator();
@@ -179,7 +228,8 @@ public class LevelModel {
 
     /**
      * Обновление пуль врагов
-     * @param delta 
+     *
+     * @param delta
      */
     private void updateEnemieBullets(float delta) {
         ListIterator<Bullet> iter = enemieBullets.listIterator();
@@ -198,16 +248,17 @@ public class LevelModel {
             bul.update(delta);
         }
     }
-    
+
     /**
      * Обновление бафов
-     * @param delta 
+     *
+     * @param delta
      */
-    private void updateBuffs(float delta){
-        
+    private void updateBuffs(float delta) {
+
         // генерируем новые
         generateBuffs(delta);
-        
+
         ListIterator<Buff> iter = buffs.listIterator();
 
         while (iter.hasNext()) {
@@ -224,7 +275,8 @@ public class LevelModel {
 
     /**
      * Обновление врагов
-     * @param delta 
+     *
+     * @param delta
      */
     private void updateEnemies(float delta) {
         ListIterator<SpaceShip> iter = enemies.listIterator();
@@ -243,14 +295,15 @@ public class LevelModel {
 
     /**
      * Обновление
-     * @param delta 
+     *
+     * @param delta
      */
     public void update(float delta) {
-        currentTime+=delta;
-        
+        currentTime += delta;
+
         //проверяем состояние игры
         checkGameState();
-        
+
         //генерируем врагов
         generateEnemies(delta);
 
@@ -261,15 +314,19 @@ public class LevelModel {
         //обновляем пули
         updateEnemieBullets(delta);
         updatePlayerBullets(delta);
-        
+
         //Обновляем баффы
         updateBuffs(delta);
+
+        //Обновляем модули
+        updateModules(delta);
     }
 
     /**
      * Обновление отрисовки
+     *
      * @param delta
-     * @param batch 
+     * @param batch
      */
     public void updateRenderer(float delta, SpriteBatch batch) {
         // отрисовать врагов
@@ -283,7 +340,7 @@ public class LevelModel {
         while (iter1.hasNext()) {
             iter1.next().renderer().render(delta, batch);
         }
-        
+
         //отрисовать баффы
         ListIterator<Buff> iter2 = buffs.listIterator();
         while (iter2.hasNext()) {
@@ -301,7 +358,8 @@ public class LevelModel {
     }
 
     /**
-     * ************************************Генерация врагов********************************************
+     * ************************************Генерация
+     * врагов********************************************
      */
     private float enemieSpawnTimeout = 1f;                          /// Время между спаунами врагов
     private float enemieLastSpawnTime = 0f;                         /// Время последнего спауна
@@ -312,12 +370,14 @@ public class LevelModel {
 
     /**
      * Генератор врагов
-     * @param delta 
+     *
+     * @param delta
      */
     private void generateEnemies(float delta) {
-        if (gameStatus != GameState.INGAME)
+        if (gameStatus != GameState.INGAME) {
             return;
-        
+        }
+
         enemieLastSpawnTime += delta;
 
         if (enemieLastSpawnTime < enemieSpawnTimeout) {
@@ -339,7 +399,8 @@ public class LevelModel {
 
     /**
      * Генератор космических пораблей
-     * @return 
+     *
+     * @return
      */
     private SpaceShip generateRandomShip() {
         int val = random.nextInt(3);
@@ -357,15 +418,16 @@ public class LevelModel {
     }
 
     /**
-     * *******************************************Генерация бафов**********************************************************
+     * *******************************************Генерация
+     * бафов**********************************************************
      */
-    
     private float buffSpawnTimeout = 20f;            /// Время между спаунами бафов 
     private float buffLastSpawnTime = 20f;           /// Время последнего спауна 
-    
+
     /**
      * Генератор баффов
-     * @param delta 
+     *
+     * @param delta
      */
     private void generateBuffs(float delta) {
         buffLastSpawnTime += delta;
@@ -386,31 +448,34 @@ public class LevelModel {
 
         buffLastSpawnTime = 0f;
     }
-    
+
     /**
      * Генератор случайных баффов
-     * @return 
+     *
+     * @return
      */
-    private Buff generateRandomBuff(){
+    private Buff generateRandomBuff() {
         int val = random.nextInt(3);
 
         switch (val) {
             case 0:
-                
+
             case 1:
-                //return BuffFactory.getBuff("LifeIncrease", player);
+                return BuffFactory.getBuff("LifeIncrease", player);
             case 2:
                 return BuffFactory.getBuff("FireRateIncrease", player);
-                //eturn BuffFactory.getBuff("UnlimitedHealth", player);
+            case 3:
+                return BuffFactory.getBuff("UnlimitedHealth", player);
         }
-        
+
         return null;
     }
-    
+
     /**
      * Проверка выхода объекта за границы экрана
+     *
      * @param o
-     * @return 
+     * @return
      */
     public boolean isOutOfWindow(GameObject o) {
         Transform t = o.transform();

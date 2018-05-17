@@ -36,7 +36,7 @@ public class FireRateIncrease extends Buff{
         this.duration = duration;
         
         this.setRenderer(new SpriteRenderer("bullets1.png",19,30));
-        this.setComponent(Movement.class,new StraightMovement(100,false));
+        this.setComponent("Movement",new StraightMovement(100,false));
     }
     
     /**
@@ -55,7 +55,7 @@ public class FireRateIncrease extends Buff{
         setTransform(t);
         
         this.setRenderer(new SpriteRenderer("bullets1.png",19,30));
-        this.setComponent(Movement.class,new StraightMovement(100,false));
+        this.setComponent("Movement",new StraightMovement(100,false));
     }
     
     
@@ -83,7 +83,7 @@ public class FireRateIncrease extends Buff{
            }
            
            // удаляем компоненту движения
-           this.removeComponent(Movement.class);
+           this.removeComponent("Movement");
            
            time = 0;
         }

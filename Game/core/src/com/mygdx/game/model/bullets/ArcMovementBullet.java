@@ -35,7 +35,7 @@ public class ArcMovementBullet extends Bullet{
         
         
         ArcMovement m = new ArcMovement(speed);     
-        this.setComponent(Movement.class,m);
+        this.setComponent("Movement",m);
         m.setTarget((int)target.transform().X,(int)target.transform().Y);
          
         this.setRenderer(new SpriteRenderer("ArcMovementBullet.png"));
@@ -62,7 +62,7 @@ public class ArcMovementBullet extends Bullet{
         
         
         ArcMovement m = new ArcMovement(speed);     
-        this.setComponent(Movement.class,m);
+        this.setComponent("Movement",m);
         m.setTarget((int)target.transform().X,(int)target.transform().Y);
          
         this.setRenderer(new SpriteRenderer("ArcMovementBullet.png"));
