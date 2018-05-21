@@ -5,7 +5,7 @@ before_install:
  - chmod +x ./Game/gradlew
   
 install:
-  - ./Game/gradlew assemble
+  - ./Game/gradlew build
 
 script:
   - ./Game/gradlew check
