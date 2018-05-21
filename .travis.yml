@@ -2,11 +2,11 @@ language: java
 jdk: oraclejdk8
 
 before_install:
- - chmod +x gradlew
+ - chmod +x ./Game/gradlew
   
 install:
-  - ./gradlew assemble
+  - ./Game/gradlew assemble
 
 script:
-  - ./gradlew check
-  - ./gradlew test
+  - ./Game/gradlew check
+  - ./Game/gradlew test
