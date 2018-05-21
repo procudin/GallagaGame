@@ -20,6 +20,9 @@ public abstract class Component {
     public static void setLevelModel(ILevelModel model) {
         levelModel = model;
     }
+    public static ILevelModel levelModel() {
+        return levelModel;
+    }
     
     public Component() {
         _componentID = getClass().getSimpleName();
